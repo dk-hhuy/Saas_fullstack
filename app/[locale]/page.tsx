@@ -16,23 +16,46 @@ import { auth } from "@clerk/nextjs/server";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 
+async function getOptionalUserId(): Promise<string | null> {
+  try {
+    const { userId } = await auth();
+    return userId;
+  } catch {
+    return null;
+  }
+}
+
+async function loadHomeCompanions(): Promise<Companion[]> {
+  try {
+    const featured = await getFeaturedCompanions(6);
+    if (featured.length > 0) return featured.slice(0, 3);
+  } catch {
+    // fall through to public library
+  }
+
+  try {
+    return await getAllCompanions({ limit: 3, filter: "marketplace" });
+  } catch {
+    try {
+      return await getAllCompanions({ limit: 3 });
+    } catch {
+      return [];
+    }
+  }
+}
+
 const Page = async () => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   const t = await getTranslations("home");
   const common = await getTranslations("common");
-  const featured = await getFeaturedCompanions(6).catch(() => [] as Companion[]);
-  let companions = featured.length > 0 ? featured.slice(0, 3) : [];
-
-  if (companions.length === 0) {
-    companions = await getAllCompanions({ limit: 3, filter: "marketplace" }).catch(
-      () => getAllCompanions({ limit: 3 })
-    );
-  }
+  const companions = await loadHomeCompanions();
   const recentSessionsResult = userId
-    ? await getUserSession(userId, { page: 1, limit: 10 })
+    ? await getUserSession(userId, { page: 1, limit: 10 }).catch(() => null)
     : null;
   const recentSessions = recentSessionsResult?.sessions ?? [];
-  const bookmarkedIds = userId ? await getBookmarkedCompanionIds() : [];
+  const bookmarkedIds = userId
+    ? await getBookmarkedCompanionIds().catch(() => [] as string[])
+    : [];
   const studentAssignments = userId
     ? await getStudentAssignments().catch(() => [])
     : [];

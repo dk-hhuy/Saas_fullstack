@@ -361,7 +361,8 @@ export const getAllCompanions = async ({
   sort = "newest",
   tag,
 }: GetAllCompanions) => {
-  const { userId } = await auth();
+  const needsAuth = filter === "mine" || filter === "saved";
+  const userId = needsAuth ? (await auth()).userId : null;
   const safeSort: LibrarySortOption =
     sort === "popular" || sort === "top_rated" || sort === "most_cloned"
       ? sort
