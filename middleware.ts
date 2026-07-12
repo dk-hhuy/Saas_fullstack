@@ -1,12 +1,17 @@
 import createMiddleware from "next-intl/middleware";
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { clerkMiddleware } from "@clerk/nextjs/server";
+import type { NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
-const isApiRoute = createRouteMatcher(["/api(.*)"]);
 
-export default clerkMiddleware((_auth, request) => {
-  if (isApiRoute(request)) {
+function isApiOrTrpcRoute(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  return pathname.startsWith("/api") || pathname.startsWith("/trpc");
+}
+
+export default clerkMiddleware(async (_auth, request: NextRequest) => {
+  if (isApiOrTrpcRoute(request)) {
     return;
   }
 
@@ -15,7 +20,9 @@ export default clerkMiddleware((_auth, request) => {
 
 export const config = {
   matcher: [
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    // next-intl: skip static files and Next/Vercel internals
+    "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+    // Clerk auth for API route handlers
     "/(api|trpc)(.*)",
   ],
 };

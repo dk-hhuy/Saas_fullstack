@@ -20,9 +20,8 @@ export const metadata: Metadata = {
   },
 };
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+// auth() requires clerkMiddleware at request time — avoid SSG prerender without middleware context
+export const dynamic = "force-dynamic";
 
 export default async function LocaleLayout({
   children,
