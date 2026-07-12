@@ -1,27 +1,33 @@
 "use client";
-import Link from "next/link"
-import { usePathname } from "next/navigation";
-import {cn} from "@/lib/utils"
-const navItems =[
-    { label: 'Home', href: '/'},
-    { label: 'Companions', href: '/companions' },
-    { label: 'My Journey', href: '/my-journey'},
-]
 
+import { useTranslations } from "next-intl";
+import TransitionLink from "./TransitionLink";
 
 const NavItems = () => {
-    const pathname = usePathname();
-  return (
-    <nav className="flex items-center gap-4">
-        {navItems.map(({ label, href }) => (
-            <Link 
-                href={href} 
-                key={label} 
-                className={cn(pathname === href && 'text-primary font-semibold')}
-            >{label}</Link>
-        ))}
-    </nav>
-  )
-}
+  const t = useTranslations("nav");
 
-export default NavItems
+  const navItems = [
+    { label: t("home"), href: "/" },
+    { label: t("about"), href: "/about" },
+    { label: t("companions"), href: "/companions" },
+    { label: t("classroom"), href: "/classroom" },
+    { label: t("myJourney"), href: "/my-journey" },
+  ];
+
+  return (
+    <nav className="hidden items-center gap-1 lg:flex">
+      {navItems.map(({ label, href }) => (
+        <TransitionLink
+          href={href}
+          key={href}
+          className="nav-link"
+          activeClassName="nav-link-active"
+        >
+          {label}
+        </TransitionLink>
+      ))}
+    </nav>
+  );
+};
+
+export default NavItems;

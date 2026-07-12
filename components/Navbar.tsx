@@ -1,29 +1,60 @@
-import Link from "next/link"
-import Image from "next/image"
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
-import NavItems from "./NavItems"
-const Navbar = () => {
-  return (
-    <div className="navbar">
-        <Link href="/">
-            <div className="flex items-center gap-2.5 cursor-pointer">
-                <Image src="/images/logo.svg" alt="logo" width={46} height={44} />
-            </div>
-        </Link>
-        <div className="flex items-center gap-8">
-            <NavItems />
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="btn-signin">Sign In</button>
-              </SignInButton>
-              <SignUpButton mode="modal" />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-        </div>
-    </div>
-  )
-}
+import { appImages } from "@/constants/images";
+import Image from "next/image";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+} from "@clerk/nextjs";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import NavItems from "./NavItems";
+import ThemeToggle from "./ThemeToggle";
+import LocaleSwitcher from "./LocaleSwitcher";
+import NavbarUserButton from "./NavbarUserButton";
 
-export default Navbar
+const Navbar = async () => {
+  const t = await getTranslations("common");
+
+  return (
+    <header className="navbar">
+      <Link href="/" className="flex items-center gap-2.5">
+        <Image
+          src={appImages.logo}
+          alt={t("brand")}
+          width={48}
+          height={48}
+          className="rounded-xl object-cover"
+          priority
+        />
+        <span className="hidden font-bold tracking-tight sm:inline">{t("brand")}</span>
+      </Link>
+
+      <div className="flex items-center gap-3 md:gap-5">
+        <NavItems />
+        <LocaleSwitcher className="max-lg:hidden" />
+        <ThemeToggle />
+
+        <SignedOut>
+          <div className="flex items-center gap-2">
+            <SignInButton mode="modal">
+              <button className="btn-signin">{t("signIn")}</button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <button className="btn-primary text-sm max-sm:hidden">{t("signUp")}</button>
+            </SignUpButton>
+          </div>
+        </SignedOut>
+
+        <SignedIn>
+          <Link href="/companions/new" className="btn-primary text-sm max-sm:hidden">
+            {t("buildCompanion")}
+          </Link>
+          <NavbarUserButton />
+        </SignedIn>
+      </div>
+    </header>
+  );
+};
+
+export default Navbar;

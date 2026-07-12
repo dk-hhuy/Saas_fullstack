@@ -1,49 +1,54 @@
-'use client';
-import { formUrlQuery, removeKeysFromUrlQuery } from '@jsmastery/utils';
-import Image from 'next/image';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+"use client";
+
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { buildCompanionsUrl } from "@/lib/library-url";
 
 const SearchInput = () => {
-    const pathname = usePathname();
-    const router = useRouter();
-    const searchParams = useSearchParams();
-    const query = searchParams.get('topic') || '';
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const topicFromUrl = searchParams.get("topic") || "";
 
-    const [searchQuery, setSearchQuery] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState(topicFromUrl);
 
-    useEffect(() => {
-      const delayDebounceFn = setTimeout(() => {
+  useEffect(() => {
+    setSearchQuery(topicFromUrl);
+  }, [topicFromUrl]);
 
-        if(searchQuery) {
-          const newUrl = formUrlQuery({
-            params: searchParams.toString(),
-            key: "topic",
-            value: searchQuery,
-          });
-          
-          router.push(newUrl, { scroll: false });
-        } else {
-          if(pathname === '/companions') {
-            const newUrl = removeKeysFromUrlQuery({
-              params: searchParams.toString(),
-              keysToRemove: ["topic"],
-            });
-            
-            router.push(newUrl, { scroll: false });
-          }
-        }
-      }, 300);
-    }, [searchQuery, router, searchParams, pathname])
+  useEffect(() => {
+    const trimmed = searchQuery.trim();
+    if (trimmed === topicFromUrl) return;
 
-    return (
-      <div className="relative border border-black rounded-lg items-center flex gap-2 h-10">
-        <Image src="/icons/search.svg" alt="search" width={15} height={15} />
-        <input placeholder="Search companions..." 
-             className="outline-none" 
-             value={searchQuery} 
-             onChange={(e) => setSearchQuery(e.target.value)}/>
-      </div>
-    )
-}
-export default SearchInput
+    const delayDebounceFn = setTimeout(() => {
+      if (pathname !== "/companions") return;
+
+      const newUrl = buildCompanionsUrl(
+        searchParams,
+        { topic: trimmed || null },
+        { resetPage: true }
+      );
+
+      router.push(newUrl, { scroll: false });
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+    // Only react to user typing — not pagination/filter URL changes.
+  }, [searchQuery, topicFromUrl, pathname, router]);
+
+  return (
+    <div className="relative flex h-10 w-full items-center gap-2 rounded-xl border border-border bg-card px-3 shadow-sm">
+      <Image src="/icons/search.svg" alt="search" width={15} height={15} />
+      <input
+        placeholder="Search companions..."
+        className="w-full bg-transparent text-sm outline-none"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+    </div>
+  );
+};
+
+export default SearchInput;
