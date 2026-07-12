@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import PageHeader from "@/components/PageHeader";
 import SessionUsageBanner from "@/components/SessionUsageBanner";
 import SettingsAccountPanel from "@/components/settings/SettingsAccountPanel";
@@ -15,7 +15,7 @@ const SettingsPage = async () => {
   const t = await getTranslations("settings");
 
   if (!userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   const [usage, reminderPreferences] = await Promise.all([

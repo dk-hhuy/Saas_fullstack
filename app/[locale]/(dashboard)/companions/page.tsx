@@ -11,7 +11,7 @@ import TagFilter from "@/components/TagFilter";
 import { listPopularMarketplaceTags } from "@/lib/actions/marketplace.actions";
 import { auth } from "@clerk/nextjs/server";
 import { Link } from "@/i18n/navigation";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 
 const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
   const { userId } = await auth();
@@ -37,7 +37,7 @@ const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
   const page = Math.max(1, Number(filters.page) || 1);
 
   if (!userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   const popularTags =

@@ -1,7 +1,7 @@
 import { PricingTable } from "@clerk/nextjs";
 import { auth } from "@clerk/nextjs/server";
 import { Link } from "@/i18n/navigation";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import PageHeader from "@/components/PageHeader";
 import SessionUsageBanner from "@/components/SessionUsageBanner";
 import { getSessionUsage } from "@/lib/actions/usage.actions";
@@ -10,7 +10,7 @@ const Subscription = async () => {
   const { userId } = await auth();
 
   if (!userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   const usage = await getSessionUsage();

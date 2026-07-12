@@ -1,6 +1,6 @@
 import { getSession } from "@/lib/actions/companion.actions";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import PageHeader from "@/components/PageHeader";
@@ -27,7 +27,7 @@ const SessionPage = async ({ params }: SessionPageProps) => {
   const user = await currentUser();
 
   if (!user || !userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   let session;

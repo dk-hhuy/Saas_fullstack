@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import CreateClassroomForm from "@/components/CreateClassroomForm";
 import PageHeader from "@/components/PageHeader";
 import {
@@ -15,7 +15,7 @@ import {
 const ClassroomDashboardPage = async () => {
   const { userId } = await auth();
   if (!userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   const [teaching, enrolled, classroomLimit] = await Promise.all([

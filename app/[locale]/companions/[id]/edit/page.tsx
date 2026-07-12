@@ -1,7 +1,7 @@
 import { getCompanion } from "@/lib/actions/companion.actions";
 import { normalizeSessionLocale } from "@/constants/locales";
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import { notFound } from "next/navigation";
 import CompanionForm from "@/components/CompanionForm";
 import DocumentUploadPanel from "@/components/DocumentUploadPanel";
@@ -19,7 +19,7 @@ const EditCompanionPage = async ({ params }: EditCompanionPageProps) => {
   const { userId } = await auth();
 
   if (!userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   let companion;

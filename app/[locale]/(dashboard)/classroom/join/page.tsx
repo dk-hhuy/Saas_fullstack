@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import JoinClassroomForm from "@/components/JoinClassroomForm";
 import PageHeader from "@/components/PageHeader";
 
@@ -10,7 +10,7 @@ interface JoinClassroomPageProps {
 const JoinClassroomPage = async ({ searchParams }: JoinClassroomPageProps) => {
   const { userId } = await auth();
   if (!userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   const params = await searchParams;

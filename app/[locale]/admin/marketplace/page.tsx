@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { notFound } from "next/navigation";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import PageHeader from "@/components/PageHeader";
 import MarketplaceReviewPanel from "@/components/MarketplaceReviewPanel";
 import { isAdminUser } from "@/lib/admin";
@@ -10,7 +10,7 @@ const AdminMarketplacePage = async () => {
   const { userId } = await auth();
 
   if (!userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   if (!isAdminUser(userId)) {

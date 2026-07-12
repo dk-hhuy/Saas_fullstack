@@ -5,7 +5,7 @@ import {
   getUserCompanionRating,
 } from "@/lib/actions/rating.actions";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { redirect } from "@/i18n/navigation";
+import { localizedRedirect, redirectToSignIn } from "@/lib/i18n-redirect";
 import { notFound } from "next/navigation";
 import CompanionComponent from "@/components/CompanionComponent";
 import CompanionRating from "@/components/CompanionRating";
@@ -30,7 +30,7 @@ const CompanionSession = async ({ params }: CompanionSessionProps) => {
   const user = await currentUser();
 
   if (!user || !userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   let companion;
@@ -63,7 +63,7 @@ const CompanionSession = async ({ params }: CompanionSessionProps) => {
   }
 
   if (!name) {
-    redirect({ href: "/companions" });
+    await localizedRedirect("/companions");
   }
 
   const ragContext = await getCompanionRagContext(id, `${subject} ${topic}`);

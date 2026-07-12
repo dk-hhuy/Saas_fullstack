@@ -1,5 +1,5 @@
 import { auth } from "@clerk/nextjs/server";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import CompanionForm from "@/components/CompanionForm";
 import PageHeader from "@/components/PageHeader";
 import { newCompanionPermissions } from "@/lib/actions/companion.actions";
@@ -10,7 +10,7 @@ const NewCompanion = async () => {
   const { userId } = await auth();
 
   if (!userId) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   const canCreateCompanion = await newCompanionPermissions();

@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { getTranslations } from "next-intl/server";
-import { redirect } from "@/i18n/navigation";
+import { redirectToSignIn } from "@/lib/i18n-redirect";
 import Image from "next/image";
 import PageHeader from "@/components/PageHeader";
 import StatCard from "@/components/StatCard";
@@ -24,7 +24,7 @@ const ProfilePage = async ({ searchParams }: SearchParams) => {
   const user = await currentUser();
   const t = await getTranslations("myJourney");
   if (!user) {
-    redirect({ href: "/sign-in" });
+    await redirectToSignIn();
   }
 
   const filters = await searchParams;
