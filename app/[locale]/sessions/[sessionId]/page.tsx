@@ -1,5 +1,6 @@
 import { getSession } from "@/lib/actions/companion.actions";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
@@ -23,8 +24,8 @@ const formatDate = (dateString: string) => {
 
 const SessionPage = async ({ params }: SessionPageProps) => {
   const { sessionId } = await params;
-  const { userId } = await auth();
-  const user = await currentUser();
+  const userId = await getOptionalUserId();
+  const user = await currentUser().catch(() => null);
 
   if (!user || !userId) {
     await redirectToSignIn();

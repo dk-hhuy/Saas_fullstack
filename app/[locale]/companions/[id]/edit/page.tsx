@@ -1,6 +1,6 @@
 import { getCompanion } from "@/lib/actions/companion.actions";
 import { normalizeSessionLocale } from "@/constants/locales";
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import { notFound } from "next/navigation";
 import CompanionForm from "@/components/CompanionForm";
@@ -16,7 +16,7 @@ interface EditCompanionPageProps {
 
 const EditCompanionPage = async ({ params }: EditCompanionPageProps) => {
   const { id } = await params;
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
 
   if (!userId) {
     await redirectToSignIn();
@@ -34,9 +34,9 @@ const EditCompanionPage = async ({ params }: EditCompanionPageProps) => {
   }
 
   const [documents, canUpload, documentLimit] = await Promise.all([
-    listCompanionDocuments(id),
-    canUploadDocuments(),
-    getDocumentLimitPerCompanion(),
+    listCompanionDocuments(id).catch(() => []),
+    canUploadDocuments().catch(() => false),
+    getDocumentLimitPerCompanion().catch(() => 0),
   ]);
 
   return (

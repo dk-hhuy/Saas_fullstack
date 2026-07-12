@@ -5,6 +5,7 @@ import { getCompanionsLibrary } from "@/lib/actions/companion.actions";
 import { getBookmarkedCompanionIds } from "@/lib/actions/bookmark.actions";
 import { getSubjectColor } from "@/lib/utils";
 import { Link } from "@/i18n/navigation";
+import { emptyCompanionsLibraryResult } from "@/lib/safe-defaults";
 
 interface CompanionsLibraryGridProps {
   filter: LibraryFilterOption;
@@ -50,8 +51,8 @@ const CompanionsLibraryGrid = async ({
       sort,
       tag,
       page,
-    });
-  const bookmarkedIds = await getBookmarkedCompanionIds();
+    }).catch(() => emptyCompanionsLibraryResult(page));
+  const bookmarkedIds = await getBookmarkedCompanionIds().catch(() => [] as string[]);
 
   const searchParams: Record<string, string> = {};
   if (filter !== "all") searchParams.filter = filter;

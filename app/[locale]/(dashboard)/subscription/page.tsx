@@ -1,19 +1,20 @@
 import { PricingTable } from "@clerk/nextjs";
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { Link } from "@/i18n/navigation";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import PageHeader from "@/components/PageHeader";
 import SessionUsageBanner from "@/components/SessionUsageBanner";
 import { getSessionUsage } from "@/lib/actions/usage.actions";
+import { defaultSessionUsage } from "@/lib/safe-defaults";
 
 const Subscription = async () => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
 
   if (!userId) {
     await redirectToSignIn();
   }
 
-  const usage = await getSessionUsage();
+  const usage = await getSessionUsage().catch(() => defaultSessionUsage());
 
   return (
     <main className="w-full">

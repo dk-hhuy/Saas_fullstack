@@ -12,18 +12,9 @@ import { getStudentAssignments } from "@/lib/actions/classroom.actions";
 import StudentAssignmentsPanel from "@/components/StudentAssignmentsPanel";
 import { getBookmarkedCompanionIds } from "@/lib/actions/bookmark.actions";
 import { getSubjectColor } from "@/lib/utils";
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-
-async function getOptionalUserId(): Promise<string | null> {
-  try {
-    const { userId } = await auth();
-    return userId;
-  } catch {
-    return null;
-  }
-}
 
 async function loadHomeCompanions(): Promise<Companion[]> {
   try {

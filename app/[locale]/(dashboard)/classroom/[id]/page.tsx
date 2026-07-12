@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import { notFound } from "next/navigation";
 import ClassroomAssignments from "@/components/ClassroomAssignments";
@@ -22,7 +22,7 @@ interface ClassroomDetailPageProps {
 
 const ClassroomDetailPage = async ({ params }: ClassroomDetailPageProps) => {
   const { id } = await params;
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
 
   if (!userId) {
     await redirectToSignIn();

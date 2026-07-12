@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import JoinClassroomForm from "@/components/JoinClassroomForm";
 import PageHeader from "@/components/PageHeader";
@@ -8,7 +8,7 @@ interface JoinClassroomPageProps {
 }
 
 const JoinClassroomPage = async ({ searchParams }: JoinClassroomPageProps) => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   if (!userId) {
     await redirectToSignIn();
   }

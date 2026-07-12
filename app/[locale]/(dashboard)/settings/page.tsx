@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
@@ -9,9 +9,10 @@ import SettingsPreferences from "@/components/settings/SettingsPreferences";
 import SettingsSection from "@/components/settings/SettingsSection";
 import { getReminderPreferences } from "@/lib/actions/reminder.actions";
 import { getSessionUsage } from "@/lib/actions/usage.actions";
+import { defaultSessionUsage } from "@/lib/safe-defaults";
 
 const SettingsPage = async () => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   const t = await getTranslations("settings");
 
   if (!userId) {
@@ -19,7 +20,7 @@ const SettingsPage = async () => {
   }
 
   const [usage, reminderPreferences] = await Promise.all([
-    getSessionUsage(),
+    getSessionUsage().catch(() => defaultSessionUsage()),
     getReminderPreferences().catch(() => null),
   ]);
 

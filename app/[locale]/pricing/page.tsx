@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { auth } from "@clerk/nextjs/server";
 import { getTranslations } from "next-intl/server";
 import PageHeader from "@/components/PageHeader";
 import PricingPlans from "@/components/PricingPlans";
 import { Link } from "@/i18n/navigation";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations("pricing");
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 const PricingPage = async () => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   const t = await getTranslations("pricing");
   const common = await getTranslations("common");
 

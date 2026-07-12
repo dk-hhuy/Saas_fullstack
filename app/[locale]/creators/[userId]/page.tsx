@@ -5,7 +5,7 @@ import StatCard from "@/components/StatCard";
 import { getCreatorProfile } from "@/lib/actions/marketplace.actions";
 import { getBookmarkedCompanionIds } from "@/lib/actions/bookmark.actions";
 import { getSubjectColor } from "@/lib/utils";
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 
 interface CreatorProfilePageProps {
   params: Promise<{ userId: string }>;
@@ -13,7 +13,7 @@ interface CreatorProfilePageProps {
 
 const CreatorProfilePage = async ({ params }: CreatorProfilePageProps) => {
   const { userId: creatorId } = await params;
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
 
   let profile;
   try {
@@ -26,7 +26,9 @@ const CreatorProfilePage = async ({ params }: CreatorProfilePageProps) => {
     notFound();
   }
 
-  const bookmarkedIds = userId ? await getBookmarkedCompanionIds() : [];
+  const bookmarkedIds = userId
+    ? await getBookmarkedCompanionIds().catch(() => [] as string[])
+    : [];
 
   return (
     <main>

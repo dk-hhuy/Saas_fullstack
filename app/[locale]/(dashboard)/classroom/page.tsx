@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { Link } from "@/i18n/navigation";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import CreateClassroomForm from "@/components/CreateClassroomForm";
@@ -13,7 +13,7 @@ import {
 } from "@/lib/plan-access";
 
 const ClassroomDashboardPage = async () => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   if (!userId) {
     await redirectToSignIn();
   }

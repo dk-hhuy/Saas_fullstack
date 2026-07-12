@@ -9,12 +9,12 @@ import CompanionsLibraryGrid, {
 } from "@/components/CompanionsLibraryGrid";
 import TagFilter from "@/components/TagFilter";
 import { listPopularMarketplaceTags } from "@/lib/actions/marketplace.actions";
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { Link } from "@/i18n/navigation";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 
 const CompanionsLibrary = async ({ searchParams }: SearchParams) => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   const filters = await searchParams;
   const subject = filters.subject ? String(filters.subject) : "";
   const topic = filters.topic ? String(filters.topic) : "";

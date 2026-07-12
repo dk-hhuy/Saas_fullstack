@@ -19,6 +19,8 @@ import { Link } from "@/i18n/navigation";
 import LearningAnalytics from "@/components/LearningAnalytics";
 import FlashcardReview from "@/components/FlashcardReview";
 import { getUserFlashcardDeck } from "@/lib/actions/flashcard.actions";
+import { appImages } from "@/constants/images";
+import { EMPTY_LEARNING_ANALYTICS } from "@/lib/safe-defaults";
 
 const ProfilePage = async ({ searchParams }: SearchParams) => {
   const user = await currentUser();
@@ -30,11 +32,25 @@ const ProfilePage = async ({ searchParams }: SearchParams) => {
   const filters = await searchParams;
   const page = Math.max(1, Number(filters.page) || 1);
 
-  const companions = await getUserCompanions(user.id);
-  const sessionResult = await getUserSession(user.id, { page });
-  const savedCompanions = await getBookmarkedCompanions(user.id);
-  const analytics = await getLearningAnalytics(user.id);
-  const flashcardDeck = await getUserFlashcardDeck(user.id);
+  const [companions, sessionResult, savedCompanions, analytics, flashcardDeck] =
+    await Promise.all([
+      getUserCompanions(user.id).catch(() => [] as Companion[]),
+      getUserSession(user.id, { page }).catch(() => ({
+        sessions: [] as SessionCompanion[],
+        total: 0,
+        page,
+        limit: 10,
+        totalPages: 1,
+      })),
+      getBookmarkedCompanions(user.id).catch(() => [] as Companion[]),
+      getLearningAnalytics(user.id).catch(() => EMPTY_LEARNING_ANALYTICS),
+      getUserFlashcardDeck(user.id).catch(() => []),
+    ]);
+
+  const displayName =
+    [user.firstName, user.lastName].filter(Boolean).join(" ") || "User";
+  const email = user.emailAddresses[0]?.emailAddress ?? "";
+  const avatarUrl = user.imageUrl || appImages.logo;
 
   return (
     <main>
@@ -46,19 +62,17 @@ const ProfilePage = async ({ searchParams }: SearchParams) => {
       <section className="section-card flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div className="flex items-center gap-4">
           <Image
-            src={user.imageUrl}
-            alt={user.firstName!}
+            src={avatarUrl}
+            alt={displayName}
             width={88}
             height={88}
             className="rounded-2xl border border-border"
           />
           <div className="flex flex-col gap-1">
-            <h2 className="text-2xl font-bold">
-              {user.firstName} {user.lastName}
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              {user.emailAddresses[0].emailAddress}
-            </p>
+            <h2 className="text-2xl font-bold">{displayName}</h2>
+            {email ? (
+              <p className="text-sm text-muted-foreground">{email}</p>
+            ) : null}
             <Link
               href="/settings"
               className="text-sm font-semibold text-primary transition-colors hover:text-primary/80"

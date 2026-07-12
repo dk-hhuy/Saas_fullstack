@@ -4,7 +4,8 @@ import { getSessionUsage } from "@/lib/actions/usage.actions";
 import {
   getUserCompanionRating,
 } from "@/lib/actions/rating.actions";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { localizedRedirect, redirectToSignIn } from "@/lib/i18n-redirect";
 import { notFound } from "next/navigation";
 import CompanionComponent from "@/components/CompanionComponent";
@@ -19,6 +20,8 @@ import SubjectBadge from "@/components/SubjectBadge";
 import { canAccessCompanion } from "@/lib/utils";
 import { normalizeSessionLocale } from "@/constants/locales";
 import { Link } from "@/i18n/navigation";
+import { appImages } from "@/constants/images";
+import { defaultSessionUsage } from "@/lib/safe-defaults";
 
 interface CompanionSessionProps {
   params: Promise<{ id: string }>;
@@ -26,8 +29,8 @@ interface CompanionSessionProps {
 
 const CompanionSession = async ({ params }: CompanionSessionProps) => {
   const { id } = await params;
-  const { userId } = await auth();
-  const user = await currentUser();
+  const userId = await getOptionalUserId();
+  const user = await currentUser().catch(() => null);
 
   if (!user || !userId) {
     await redirectToSignIn();
@@ -46,7 +49,7 @@ const CompanionSession = async ({ params }: CompanionSessionProps) => {
 
   const { name, subject, topic, duration, author } = companion;
   const isOwner = author === userId;
-  const usage = await getSessionUsage();
+  const usage = await getSessionUsage().catch(() => defaultSessionUsage());
 
   let ratingStats = null;
   let userRating: number | null = null;
@@ -58,7 +61,7 @@ const CompanionSession = async ({ params }: CompanionSessionProps) => {
       };
     }
     if (!isOwner) {
-      userRating = await getUserCompanionRating(id);
+      userRating = await getUserCompanionRating(id).catch(() => null);
     }
   }
 
@@ -66,7 +69,9 @@ const CompanionSession = async ({ params }: CompanionSessionProps) => {
     await localizedRedirect("/companions");
   }
 
-  const ragContext = await getCompanionRagContext(id, `${subject} ${topic}`);
+  const ragContext = await getCompanionRagContext(id, `${subject} ${topic}`).catch(
+    () => null
+  );
 
   return (
     <main>
@@ -140,8 +145,8 @@ const CompanionSession = async ({ params }: CompanionSessionProps) => {
       <CompanionComponent
         {...companion}
         companionId={id}
-        userName={user.firstName!}
-        userImage={user.imageUrl!}
+        userName={user.firstName ?? "You"}
+        userImage={user.imageUrl || appImages.logo}
         voice={companion.voice || "female"}
         style={companion.style || "casual"}
         systemPrompt={companion.system_prompt}

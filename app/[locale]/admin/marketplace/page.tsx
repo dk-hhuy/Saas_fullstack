@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { notFound } from "next/navigation";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import PageHeader from "@/components/PageHeader";
@@ -7,7 +7,7 @@ import { isAdminUser } from "@/lib/admin";
 import { listPendingMarketplaceCompanions } from "@/lib/actions/marketplace.actions";
 
 const AdminMarketplacePage = async () => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
 
   if (!userId) {
     await redirectToSignIn();
@@ -17,7 +17,7 @@ const AdminMarketplacePage = async () => {
     notFound();
   }
 
-  const pending = await listPendingMarketplaceCompanions();
+  const pending = await listPendingMarketplaceCompanions().catch(() => [] as Companion[]);
 
   return (
     <main>

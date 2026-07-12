@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs/server";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import CompanionForm from "@/components/CompanionForm";
 import PageHeader from "@/components/PageHeader";
@@ -7,13 +7,13 @@ import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 
 const NewCompanion = async () => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
 
   if (!userId) {
     await redirectToSignIn();
   }
 
-  const canCreateCompanion = await newCompanionPermissions();
+  const canCreateCompanion = await newCompanionPermissions().catch(() => false);
 
   return (
     <main className="w-full">
