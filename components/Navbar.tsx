@@ -32,8 +32,10 @@ const Navbar = async () => {
 
       <div className="flex items-center gap-3 md:gap-5">
         <NavItems />
-        <LocaleSwitcher className="max-lg:hidden" />
-        <ThemeToggle />
+        <div className="flex items-center gap-2">
+          <LocaleSwitcher className="max-lg:hidden" />
+          <ThemeToggle />
+        </div>
 
         <SignedOut>
           <div className="flex items-center gap-2">
