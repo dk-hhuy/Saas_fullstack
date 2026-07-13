@@ -1,11 +1,11 @@
 'use server';
 
-import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 import { createAuthenticatedSupabaseClient } from "@/lib/supabase";
 
 export const toggleBookmark = async (companionId: string) => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   if (!userId) throw new Error("You must be signed in to bookmark");
 
   const supabase = createAuthenticatedSupabaseClient();
@@ -40,7 +40,7 @@ export const toggleBookmark = async (companionId: string) => {
 };
 
 export const getBookmarkedCompanionIds = async (): Promise<string[]> => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   if (!userId) return [];
 
   const supabase = createAuthenticatedSupabaseClient();
@@ -72,7 +72,7 @@ export const getBookmarkedCompanions = async (userId: string) => {
 };
 
 export const isBookmarked = async (companionId: string) => {
-  const { userId } = await auth();
+  const userId = await getOptionalUserId();
   if (!userId) return false;
 
   const supabase = createAuthenticatedSupabaseClient();

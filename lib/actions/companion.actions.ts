@@ -21,6 +21,7 @@ import {
 import { appendSessionMessages, loadSessionTranscript } from "@/lib/session-messages";
 import { isSearchableTerm, sanitizeLibrarySearchTerm } from "@/lib/library-search";
 import { withSlowQueryWarning } from "@/lib/query-timing";
+import { getOptionalUserId } from "@/lib/auth-helpers";
 
 const REVALIDATE_PATHS = ["/", "/companions", "/my-journey"] as const;
 
@@ -678,8 +679,10 @@ export const newCompanionPermissions = async () => {
 };
 
 export const cloneCompanion = async (sourceId: string) => {
-  const { userId } = await auth();
-  if (!userId) throw new Error("You must be signed in to clone a companion");
+  const userId = await getOptionalUserId();
+  if (!userId) {
+    throw new Error("You must be signed in to clone a companion");
+  }
 
   const canCreate = await newCompanionPermissions();
   if (!canCreate) {

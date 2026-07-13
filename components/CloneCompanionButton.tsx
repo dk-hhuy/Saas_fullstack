@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Copy } from "lucide-react";
 import { cloneCompanion } from "@/lib/actions/companion.actions";
 import { cn } from "@/lib/utils";
@@ -40,36 +41,79 @@ const CloneCompanionButton = ({
     }
   };
 
+  const stopCardNavigation = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   if (variant === "button") {
     return (
-      <button
-        type="button"
-        onClick={handleClone}
-        disabled={isCloning}
-        aria-label={`Clone ${companionName}`}
-        className={cn(
-          "companion-bookmark hover:opacity-80 transition-opacity disabled:opacity-50",
-          className
-        )}
-      >
-        <Copy size={14} aria-hidden />
-      </button>
+      <>
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button
+              type="button"
+              onClick={stopCardNavigation}
+              aria-label={`Sign in to clone ${companionName}`}
+              className={cn(
+                "companion-bookmark hover:opacity-80 transition-opacity",
+                className
+              )}
+            >
+              <Copy size={14} aria-hidden />
+            </button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <button
+            type="button"
+            onClick={handleClone}
+            disabled={isCloning}
+            aria-label={`Clone ${companionName}`}
+            className={cn(
+              "companion-bookmark hover:opacity-80 transition-opacity disabled:opacity-50",
+              className
+            )}
+          >
+            <Copy size={14} aria-hidden />
+          </button>
+        </SignedIn>
+      </>
     );
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleClone}
-      disabled={isCloning}
-      className={cn(
-        "inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted disabled:opacity-50",
-        className
-      )}
-    >
-      <Copy size={16} />
-      {isCloning ? "Cloning..." : "Use as template"}
-    </button>
+    <>
+      <SignedOut>
+        <SignInButton mode="modal">
+          <button
+            type="button"
+            onClick={stopCardNavigation}
+            className={cn(
+              "inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted",
+              className
+            )}
+          >
+            <Copy size={16} />
+            Use as template
+          </button>
+        </SignInButton>
+      </SignedOut>
+      <SignedIn>
+        <button
+          type="button"
+          onClick={handleClone}
+          disabled={isCloning}
+          className={cn(
+            "inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted disabled:opacity-50",
+            className
+          )}
+        >
+          <Copy size={16} />
+          {isCloning ? "Cloning..." : "Use as template"}
+        </button>
+      </SignedIn>
+    </>
   );
 };
 
