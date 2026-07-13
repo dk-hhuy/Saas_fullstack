@@ -9,14 +9,19 @@ export interface SendEmailResult {
   sent: boolean;
   skipped?: boolean;
   reason?: string;
+  error?: string;
   id?: string;
+}
+
+export function isEmailConfigured(): boolean {
+  return Boolean(process.env.RESEND_API_KEY?.trim() && process.env.EMAIL_FROM?.trim());
 }
 
 export async function sendEmail(
   input: SendEmailInput
 ): Promise<SendEmailResult> {
-  const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.EMAIL_FROM;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const from = process.env.EMAIL_FROM?.trim();
 
   if (!apiKey || !from) {
     return {
@@ -26,26 +31,36 @@ export async function sendEmail(
     };
   }
 
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [input.to],
-      subject: input.subject,
-      html: input.html,
-      text: input.text,
-    }),
-  });
+  try {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [input.to],
+        subject: input.subject,
+        html: input.html,
+        text: input.text,
+      }),
+    });
 
-  if (!response.ok) {
-    const body = await response.text();
-    throw new Error(`Resend API error (${response.status}): ${body}`);
+    if (!response.ok) {
+      const body = await response.text();
+      return {
+        sent: false,
+        error: `Email provider error (${response.status}): ${body}`,
+      };
+    }
+
+    const data = (await response.json()) as { id?: string };
+    return { sent: true, id: data.id };
+  } catch (error) {
+    return {
+      sent: false,
+      error: error instanceof Error ? error.message : "Failed to send email",
+    };
   }
-
-  const data = (await response.json()) as { id?: string };
-  return { sent: true, id: data.id };
 }

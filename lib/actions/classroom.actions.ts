@@ -11,6 +11,10 @@ import {
 } from "@/lib/plan-access";
 import { createAuthenticatedSupabaseClient } from "@/lib/supabase";
 
+export type ClassroomInviteEmailResult =
+  | { success: true }
+  | { success: false; error: string };
+
 export interface Classroom {
   id: string;
   teacher_id: string;
@@ -448,43 +452,70 @@ export async function getClassroomMemberStats(
 export async function sendClassroomInviteEmail(
   classroomId: string,
   email: string
-) {
-  const userId = await requireUserId();
-  const classroom = await assertClassroomTeacher(classroomId, userId);
-
-  const trimmedEmail = email.trim().toLowerCase();
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
-    throw new Error("Enter a valid email address");
-  }
-
-  let teacherName = "Your teacher";
+): Promise<ClassroomInviteEmailResult> {
   try {
-    const client = await clerkClient();
-    const user = await client.users.getUser(userId);
-    const name = [user.firstName, user.lastName].filter(Boolean).join(" ").trim();
-    if (name) teacherName = name;
-  } catch {
-    // keep default
+    const userId = await requireUserId();
+    const classroom = await assertClassroomTeacher(classroomId, userId);
+
+    const trimmedEmail = email.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+      return { success: false, error: "Enter a valid email address" };
+    }
+
+    let teacherName = "Your teacher";
+    try {
+      const client = await clerkClient();
+      const user = await client.users.getUser(userId);
+      const name = [user.firstName, user.lastName].filter(Boolean).join(" ").trim();
+      if (name) teacherName = name;
+    } catch {
+      // keep default
+    }
+
+    const { subject, html, text } = buildClassroomInviteEmail({
+      classroomName: classroom.name,
+      inviteCode: classroom.invite_code,
+      teacherName,
+    });
+
+    const result = await sendEmail({
+      to: trimmedEmail,
+      subject,
+      html,
+      text,
+    });
+
+    if (result.skipped) {
+      return {
+        success: false,
+        error:
+          "Email is not configured on this site. Share the invite code manually instead.",
+      };
+    }
+
+    if (!result.sent) {
+      return {
+        success: false,
+        error: result.error ?? "Failed to send invite email. Try again or share the code.",
+      };
+    }
+
+    return { success: true };
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Failed to send invite email";
+
+    if (message.includes("signed in")) {
+      return { success: false, error: "Sign in to send classroom invites." };
+    }
+
+    if (message.includes("Only the classroom teacher")) {
+      return { success: false, error: message };
+    }
+
+    return {
+      success: false,
+      error: "Could not send invite email. Share the invite code manually instead.",
+    };
   }
-
-  const { subject, html, text } = buildClassroomInviteEmail({
-    classroomName: classroom.name,
-    inviteCode: classroom.invite_code,
-    teacherName,
-  });
-
-  const result = await sendEmail({
-    to: trimmedEmail,
-    subject,
-    html,
-    text,
-  });
-
-  if (result.skipped) {
-    throw new Error(
-      "Email is not configured. Share the invite code manually instead."
-    );
-  }
-
-  return result;
 }

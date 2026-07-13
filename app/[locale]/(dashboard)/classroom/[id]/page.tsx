@@ -11,6 +11,7 @@ import {
   listClassroomAssignments,
   listClassroomMembers,
 } from "@/lib/actions/classroom.actions";
+import { isEmailConfigured } from "@/lib/email/resend";
 import {
   getAllCompanions,
   getUserCompanions,
@@ -69,7 +70,12 @@ const ClassroomDetailPage = async ({ params }: ClassroomDetailPageProps) => {
       />
 
       {classroom.isTeacher && (
-        <ClassroomInvitePanel classroomId={id} inviteCode={classroom.invite_code} />
+        <ClassroomInvitePanel
+          classroomId={id}
+          classroomName={classroom.name}
+          inviteCode={classroom.invite_code}
+          emailConfigured={isEmailConfigured()}
+        />
       )}
 
       <ClassroomAssignments

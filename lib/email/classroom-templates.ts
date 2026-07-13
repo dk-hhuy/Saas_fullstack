@@ -1,3 +1,8 @@
+import {
+  buildClassroomInvitePlainText,
+  buildClassroomJoinUrl,
+} from "@/lib/classroom-invite-content";
+
 function appBaseUrl() {
   return process.env.NEXT_PUBLIC_APP_URL || process.env.APP_URL || "http://localhost:3000";
 }
@@ -8,15 +13,12 @@ export function buildClassroomInviteEmail(input: {
   teacherName: string;
 }) {
   const baseUrl = appBaseUrl();
-  const joinUrl = `${baseUrl}/classroom/join?code=${encodeURIComponent(input.inviteCode)}`;
-  const subject = `Join ${input.classroomName} on TutorForge`;
-
-  const text = `${input.teacherName} invited you to join "${input.classroomName}" on TutorForge.
-
-Join with invite code: ${input.inviteCode}
-Or open: ${joinUrl}
-
-— TutorForge`;
+  const { subject, body: text, joinUrl } = buildClassroomInvitePlainText({
+    classroomName: input.classroomName,
+    inviteCode: input.inviteCode,
+    teacherName: input.teacherName,
+    baseUrl,
+  });
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -34,3 +36,6 @@ Or open: ${joinUrl}
 
   return { subject, text, html };
 }
+
+// Re-export for server callers that only need the join URL.
+export { buildClassroomJoinUrl };
