@@ -2,12 +2,23 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 
 interface SessionQuizProps {
   questions: QuizQuestion[];
+  submitLabel?: string;
+  scoreTemplate?: string;
+  onSubmit?: (answers: Record<number, number>) => void | Promise<void>;
+  submitting?: boolean;
 }
 
-const SessionQuiz = ({ questions }: SessionQuizProps) => {
+const SessionQuiz = ({
+  questions,
+  submitLabel = "Check answers",
+  scoreTemplate = "You scored {score} / {total}",
+  onSubmit,
+  submitting = false,
+}: SessionQuizProps) => {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [submitted, setSubmitted] = useState(false);
 
@@ -18,6 +29,16 @@ const SessionQuiz = ({ questions }: SessionQuizProps) => {
         0
       )
     : 0;
+
+  const handleSubmit = async () => {
+    if (onSubmit) {
+      await onSubmit(answers);
+      return;
+    }
+    setSubmitted(true);
+  };
+
+  const showResults = submitted && !onSubmit;
 
   return (
     <div className="flex flex-col gap-6">
@@ -30,13 +51,13 @@ const SessionQuiz = ({ questions }: SessionQuizProps) => {
             {question.options.map((option, oIndex) => {
               const isSelected = answers[qIndex] === oIndex;
               const isCorrect = oIndex === question.correctIndex;
-              const showResult = submitted;
+              const showResult = showResults;
 
               return (
                 <li key={oIndex}>
                   <button
                     type="button"
-                    disabled={submitted}
+                    disabled={showResults || submitting}
                     onClick={() =>
                       setAnswers((prev) => ({ ...prev, [qIndex]: oIndex }))
                     }
@@ -68,18 +89,25 @@ const SessionQuiz = ({ questions }: SessionQuizProps) => {
         </fieldset>
       ))}
 
-      {!submitted ? (
+      {!showResults ? (
         <button
           type="button"
           className="btn-primary w-fit"
-          disabled={Object.keys(answers).length < questions.length}
-          onClick={() => setSubmitted(true)}
+          disabled={
+            Object.keys(answers).length < questions.length || submitting
+          }
+          onClick={handleSubmit}
         >
-          Check answers
+          {submitting ? (
+            <Loader2 size={16} className="animate-spin" aria-hidden />
+          ) : null}
+          {submitLabel}
         </button>
       ) : (
         <p className="text-sm font-medium">
-          You scored {score} / {questions.length}
+          {scoreTemplate
+            .replace("{score}", String(score))
+            .replace("{total}", String(questions.length))}
         </p>
       )}
     </div>

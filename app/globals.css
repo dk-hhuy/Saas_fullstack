@@ -273,6 +273,57 @@
   .landing-hero-image-frame {
     @apply relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/15 shadow-2xl;
   }
+  .home-auth-main {
+    @apply gap-0 p-0 pb-0;
+  }
+  .home-auth-body {
+    @apply flex flex-col gap-8 px-6 py-8 md:px-10 md:py-10 lg:px-14;
+  }
+  .home-promo-hero {
+    @apply relative w-full min-h-[32rem] overflow-hidden px-6 py-10 md:min-h-[36rem] md:px-10 md:py-12 lg:min-h-[40rem] lg:px-14 lg:py-14;
+    background:
+      radial-gradient(ellipse 80% 60% at 100% 0%, rgb(252 204 65 / 0.2), transparent 55%),
+      linear-gradient(135deg, #e84a28 0%, #fe5933 48%, #e04e2a 100%);
+  }
+  .home-promo-hero-waves {
+    @apply pointer-events-none absolute inset-0 overflow-hidden text-cta-gold/50;
+  }
+  .home-promo-hero-wave {
+    @apply absolute w-[140%] max-w-none;
+  }
+  .home-promo-hero-wave-top {
+    @apply -left-[15%] top-8 opacity-60;
+  }
+  .home-promo-hero-wave-bottom {
+    @apply -right-[10%] bottom-10 opacity-40;
+  }
+  .home-promo-hero-grid {
+    @apply relative z-10 grid w-full items-center pb-[46%] sm:pb-[42%] lg:max-w-[48%] lg:pb-0;
+  }
+  .home-promo-hero-content {
+    @apply flex flex-col items-start gap-5 text-left;
+  }
+  .home-promo-hero-badge {
+    @apply rounded-full bg-cta-gold px-3 py-1.5 text-sm font-semibold text-neutral-900;
+  }
+  .home-promo-hero-title {
+    @apply max-w-2xl text-3xl font-bold leading-tight tracking-tight text-white md:text-4xl lg:text-5xl;
+  }
+  .home-promo-hero-description {
+    @apply max-w-xl text-base leading-relaxed text-white/90 md:text-lg;
+  }
+  .home-promo-hero-btn-primary {
+    @apply inline-flex items-center gap-2 rounded-xl bg-cta-gold px-6 py-3 text-sm font-semibold text-neutral-900 shadow-md transition-transform hover:-translate-y-0.5 hover:bg-cta-gold/90;
+  }
+  .home-promo-hero-btn-secondary {
+    @apply inline-flex items-center gap-2 rounded-xl border-2 border-white/80 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10;
+  }
+  .home-promo-hero-figure {
+    @apply pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex h-[72%] items-end justify-center sm:h-[78%] lg:inset-x-auto lg:right-0 lg:top-0 lg:h-full lg:w-[58%] lg:justify-end;
+  }
+  .home-promo-hero-image {
+    @apply h-full w-auto max-w-none rounded-[2rem] object-contain object-bottom shadow-[0_28px_60px_-16px_rgb(0_0_0/0.45)] sm:min-w-[115%] lg:h-full lg:min-w-full lg:object-cover lg:object-[center_15%];
+  }
   .about-main {
     @apply gap-0 p-0 pb-0;
   }
@@ -313,10 +364,10 @@
     @apply flex items-end justify-center gap-3 sm:gap-4 md:gap-5;
   }
   .about-hero-card {
-    @apply rounded-2xl border border-black/5 bg-white p-3 text-left text-foreground shadow-[0_20px_50px_-18px_rgb(0_0_0/0.4)] sm:p-4;
+    @apply rounded-2xl border border-black/5 bg-white p-3 text-left text-neutral-900 shadow-[0_20px_50px_-18px_rgb(0_0_0/0.4)] sm:p-4;
   }
   .about-hero-card-header {
-    @apply mb-2 flex items-center gap-2 text-xs font-semibold text-muted-foreground sm:mb-3;
+    @apply mb-2 flex items-center gap-2 text-xs font-semibold text-neutral-500 sm:mb-3;
   }
   .about-hero-card-side {
     @apply hidden w-[9.5rem] shrink-0 sm:block md:w-[11.5rem] lg:w-[12.5rem];
@@ -328,13 +379,13 @@
     @apply grid grid-cols-2 gap-3;
   }
   .about-hero-stat-value {
-    @apply text-xl font-bold text-foreground;
+    @apply text-xl font-bold text-neutral-900;
   }
   .about-hero-stat-label {
-    @apply text-[11px] text-muted-foreground;
+    @apply text-[11px] text-neutral-500;
   }
   .about-hero-progress {
-    @apply mt-4 h-2 overflow-hidden rounded-full bg-muted;
+    @apply mt-4 h-2 overflow-hidden rounded-full bg-neutral-200;
   }
   .about-hero-progress-bar {
     @apply h-full rounded-full bg-primary;
@@ -349,10 +400,10 @@
     @apply min-w-0 flex-1;
   }
   .about-hero-session-title {
-    @apply text-sm font-semibold;
+    @apply text-sm font-semibold text-neutral-900;
   }
   .about-hero-session-topic {
-    @apply text-[11px] text-muted-foreground;
+    @apply text-[11px] text-neutral-500;
   }
   .about-hero-waveform {
     @apply mt-2 flex items-end gap-0.5;
@@ -364,7 +415,7 @@
     @apply flex flex-col gap-2;
   }
   .about-hero-library-item {
-    @apply flex items-center gap-2 text-xs font-medium;
+    @apply flex items-center gap-2 text-xs font-medium text-neutral-900;
   }
   .about-hero-library-badge {
     @apply shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary;

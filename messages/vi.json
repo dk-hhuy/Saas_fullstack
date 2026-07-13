@@ -15,6 +15,8 @@
     "about": "Giới thiệu",
     "companions": "Companions",
     "classroom": "Lớp học",
+    "assessment": "Đánh giá",
+    "report": "Báo cáo",
     "myJourney": "Hành trình"
   },
   "footer": {
@@ -38,11 +40,18 @@
     "highlight2": "Companion tùy chỉnh cho mọi môn học",
     "highlight3": "Bản ghi, tóm tắt & câu hỏi ôn tập sau buổi học",
     "getStarted": "Bắt đầu miễn phí",
-    "browseCompanions": "Duyệt companions"
+    "browseCompanions": "Duyệt companions",
+    "promoTitle": "Học tự tin qua luyện nói thực tế",
+    "promoDescription": "Gia sư AI giúp bạn nói, giải thích ý tưởng và xây kỹ năng cho mọi môn học.",
+    "learnMore": "Tìm hiểu thêm"
   },
   "home": {
     "featuredTitle": "Companion nổi bật",
     "featuredGuestDesc": "Thử gia sư AI công khai — đăng nhập để lưu tiến độ.",
+    "welcomeTitle": "Giữ nhịp học của bạn",
+    "welcomeDesc": "Chọn companion, bắt đầu buổi học giọng nói và xem lại tiến độ bất cứ lúc nào.",
+    "welcomePrimary": "Duyệt companions",
+    "welcomeSecondary": "Hành trình",
     "readyTitle": "Sẵn sàng bắt đầu học?",
     "readyDesc": "Tạo tài khoản miễn phí để tạo companion, lưu buổi học và theo dõi tiến độ trên Hành trình.",
     "popularTitle": "Companion phổ biến",
@@ -123,6 +132,93 @@
     "noFeatured": "Chưa có companion nổi bật.",
     "noMarketplace": "Không có companion marketplace phù hợp bộ lọc."
   },
+  "report": {
+    "title": "Báo cáo tiến độ",
+    "description": "Hoạt động học, kết quả placement và quiz — tổng hợp một nơi.",
+    "assessmentTitle": "Tóm tắt đánh giá",
+    "assessmentDesc": "Placement test và quiz từ session trên tài khoản của bạn.",
+    "placementCount": "Số placement test",
+    "avgPlacement": "Tổng điểm placement",
+    "sessionQuizzes": "Quiz từ session",
+    "latestPlacement": "Placement gần nhất",
+    "openAssessment": "Mở Đánh giá",
+    "openJourney": "Mở Hành trình",
+    "placementHistory": "Lịch sử placement",
+    "charts": {
+      "title": "Xu hướng theo thời gian",
+      "description": "Hoạt động học hàng tuần và tiến độ điểm placement.",
+      "weeklyActivity": "Hoạt động hàng tuần",
+      "placementTrend": "Xu hướng điểm placement",
+      "minutes": "Phút học",
+      "sessions": "Số buổi",
+      "score": "Điểm",
+      "empty": "Hoàn thành buổi voice hoặc placement test để xem xu hướng.",
+      "noSessions": "Chưa có buổi học trong 8 tuần gần đây.",
+      "singlePlacement": "Điểm placement gần nhất: {score}%. Làm thêm bài để thấy đường xu hướng.",
+      "subjectWeekly": "Phút học theo môn (hàng tuần)"
+    },
+    "usage": {
+      "title": "Sử dụng gói",
+      "description": "Phút voice đã dùng trong tháng thanh toán hiện tại.",
+      "usedMinutes": "Phút đã dùng",
+      "remaining": "Phút còn lại",
+      "manage": "Quản lý gói",
+      "monthlyLimit": "Giới hạn voice tháng",
+      "min": "phút"
+    },
+    "weekCompare": {
+      "title": "Tuần này vs tuần trước",
+      "description": "So sánh mức độ học gần đây.",
+      "thisWeek": "Tuần này",
+      "lastWeek": "Tuần trước",
+      "min": "phút",
+      "sessions": "buổi",
+      "vsLastWeek": "so với tuần trước (phút)",
+      "sessionDelta": "Số buổi {value} so với tuần trước"
+    },
+    "placementBySubject": {
+      "title": "Placement theo môn",
+      "description": "Điểm trung bình và level mới nhất theo môn.",
+      "tests": "{count} bài test",
+      "avgScore": "TB {score}%",
+      "level": "Level: {level}"
+    },
+    "level": {
+      "beginner": "Cơ bản",
+      "intermediate": "Trung cấp",
+      "advanced": "Nâng cao"
+    }
+  },
+  "assessment": {
+    "title": "Đánh giá",
+    "description": "Làm bài placement test để xác định trình độ, rồi xem lại quiz từ các buổi học voice trước.",
+    "placementTitle": "Placement test",
+    "placementDesc": "Trả lời câu hỏi do AI tạo để ước lượng trình độ hiện tại theo môn học.",
+    "subjectLabel": "Môn học",
+    "topicLabel": "Chủ đề (tùy chọn)",
+    "topicPlaceholder": "vd. Đại số cơ bản, động từ tiếng Tây Ban Nha…",
+    "startPlacement": "Bắt đầu placement test",
+    "submitPlacement": "Nộp bài",
+    "yourScore": "Điểm của bạn",
+    "recommendedLevel": "Trình độ gợi ý:",
+    "takeAnother": "Làm bài khác",
+    "noApiKey": "Placement test cần cấu hình GEMINI_API_KEY.",
+    "generateError": "Không tạo được bài test. Vui lòng thử lại.",
+    "saveError": "Không lưu được kết quả. Chạy migration 019-placement-assessments.sql nếu mới cài.",
+    "scoreResult": "Bạn được {score} / {total}",
+    "hubTitle": "Quiz hub",
+    "hubDesc": "Kết quả placement và quiz từ session ở một nơi.",
+    "hubEmpty": "Chưa có quiz. Hoàn thành placement test hoặc buổi voice có quiz được tạo.",
+    "placementHistory": "Placement test",
+    "sessionQuizzes": "Quiz từ session",
+    "unnamedSession": "Buổi voice",
+    "questionCount": "{count} câu hỏi",
+    "level": {
+      "beginner": "Cơ bản",
+      "intermediate": "Trung cấp",
+      "advanced": "Nâng cao"
+    }
+  },
   "classroom": {
     "title": "Lớp học",
     "description": "Tạo lớp, mời học sinh, giao companion và theo dõi tiến độ.",
@@ -135,7 +231,16 @@
     "startAssignment": "Bắt đầu bài tập",
     "rosterTitle": "Danh sách học sinh",
     "inviteTitle": "Mời học sinh",
-    "privacyNote": "Giáo viên chỉ xem số buổi học và phút — không xem transcript đầy đủ."
+    "privacyNote": "Giáo viên chỉ xem số buổi học và phút — không xem transcript đầy đủ.",
+    "progressReport": {
+      "title": "Báo cáo tiến độ lớp",
+      "description": "Tổng hợp hoạt động cho {name} — chỉ số buổi và phút học.",
+      "studentsEnrolled": "Học sinh đã ghi danh",
+      "totalSessions": "Tổng số buổi",
+      "totalMinutes": "Tổng số phút",
+      "activeStudents": "{active}/{total} học sinh đã hoàn thành ít nhất một buổi.",
+      "minutesLabel": "Phút"
+    }
   },
   "assistant": {
     "title": "Trợ lý TutorForge",

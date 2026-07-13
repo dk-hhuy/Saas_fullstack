@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/i18n/navigation";
-import { GraduationCap, History, Plus, Search } from "lucide-react";
+import { ClipboardList, GraduationCap, History, Plus, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { SignedIn } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 const mobileItems = [
   { label: "Home", href: "/", icon: GraduationCap },
   { label: "Library", href: "/companions", icon: Search },
+  { label: "Quiz", href: "/assessment", icon: ClipboardList },
   { label: "Journey", href: "/my-journey", icon: History },
   { label: "Build", href: "/companions/new", icon: Plus },
 ];

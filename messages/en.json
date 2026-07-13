@@ -15,6 +15,8 @@
     "about": "About",
     "companions": "Companions",
     "classroom": "Classroom",
+    "assessment": "Assessment",
+    "report": "Report",
     "myJourney": "My Journey"
   },
   "footer": {
@@ -38,11 +40,18 @@
     "highlight2": "Custom companions for any subject",
     "highlight3": "Session transcripts, summaries & quizzes",
     "getStarted": "Get started free",
-    "browseCompanions": "Browse companions"
+    "browseCompanions": "Browse companions",
+    "promoTitle": "Learn confidently through real voice practice",
+    "promoDescription": "AI-powered tutoring that helps you speak, explain ideas out loud, and build skills across any subject.",
+    "learnMore": "Learn more"
   },
   "home": {
     "featuredTitle": "Featured companions",
     "featuredGuestDesc": "Try a public AI tutor — sign in to save your progress.",
+    "welcomeTitle": "Keep your learning momentum going",
+    "welcomeDesc": "Pick a companion, start a voice session, and review your progress whenever you are ready.",
+    "welcomePrimary": "Browse companions",
+    "welcomeSecondary": "My Journey",
     "readyTitle": "Ready to start learning?",
     "readyDesc": "Create a free account to build companions, save sessions, and track your progress on My Journey.",
     "popularTitle": "Popular Companions",
@@ -123,6 +132,93 @@
     "noFeatured": "No featured companions yet.",
     "noMarketplace": "No marketplace companions match your filters."
   },
+  "report": {
+    "title": "Progress Report",
+    "description": "Your learning activity, placement results, and quiz progress in one view.",
+    "assessmentTitle": "Assessment summary",
+    "assessmentDesc": "Placement tests and session quizzes from your account.",
+    "placementCount": "Placement tests taken",
+    "avgPlacement": "Total placement score",
+    "sessionQuizzes": "Session quizzes available",
+    "latestPlacement": "Latest placement",
+    "openAssessment": "Open Assessment",
+    "openJourney": "Open My Journey",
+    "placementHistory": "Placement history",
+    "charts": {
+      "title": "Trends over time",
+      "description": "Weekly study activity and placement score progress.",
+      "weeklyActivity": "Weekly activity",
+      "placementTrend": "Placement score trend",
+      "minutes": "Minutes",
+      "sessions": "Sessions",
+      "score": "Score",
+      "empty": "Complete voice sessions or placement tests to see trends.",
+      "noSessions": "No sessions in the last 8 weeks yet.",
+      "singlePlacement": "Latest placement score: {score}%. Take another test to see a trend line.",
+      "subjectWeekly": "Minutes by subject (weekly)"
+    },
+    "usage": {
+      "title": "Plan usage",
+      "description": "Voice minutes used this billing month on your current plan.",
+      "usedMinutes": "Minutes used",
+      "remaining": "Minutes remaining",
+      "manage": "Manage subscription",
+      "monthlyLimit": "Monthly voice limit",
+      "min": "min"
+    },
+    "weekCompare": {
+      "title": "This week vs last week",
+      "description": "Compare your recent study consistency.",
+      "thisWeek": "This week",
+      "lastWeek": "Last week",
+      "min": "min",
+      "sessions": "sessions",
+      "vsLastWeek": "vs last week (minutes)",
+      "sessionDelta": "Sessions {value} vs last week"
+    },
+    "placementBySubject": {
+      "title": "Placement by subject",
+      "description": "Average scores and latest level per subject.",
+      "tests": "{count} tests",
+      "avgScore": "{score}% avg",
+      "level": "Level: {level}"
+    },
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
+  },
+  "assessment": {
+    "title": "Assessment",
+    "description": "Take a placement test to find your level, then review quizzes from past voice sessions.",
+    "placementTitle": "Placement test",
+    "placementDesc": "Answer AI-generated questions to estimate your current level in a subject.",
+    "subjectLabel": "Subject",
+    "topicLabel": "Topic (optional)",
+    "topicPlaceholder": "e.g. Algebra basics, Spanish verbs…",
+    "startPlacement": "Start placement test",
+    "submitPlacement": "Submit answers",
+    "yourScore": "Your score",
+    "recommendedLevel": "Recommended level:",
+    "takeAnother": "Take another test",
+    "noApiKey": "Placement tests require GEMINI_API_KEY to be configured.",
+    "generateError": "Could not generate placement test. Please try again.",
+    "saveError": "Could not save your results. Run migration 019-placement-assessments.sql if this is a new install.",
+    "scoreResult": "You scored {score} / {total}",
+    "hubTitle": "Quiz hub",
+    "hubDesc": "Placement results and session quizzes in one place.",
+    "hubEmpty": "No quizzes yet. Complete a placement test or finish a voice session with a generated quiz.",
+    "placementHistory": "Placement tests",
+    "sessionQuizzes": "Session quizzes",
+    "unnamedSession": "Voice session",
+    "questionCount": "{count, plural, one {# question} other {# questions}}",
+    "level": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
+  },
   "classroom": {
     "title": "Classrooms",
     "description": "Create classes, invite students, assign companions, and track progress.",
@@ -135,7 +231,16 @@
     "startAssignment": "Start assignment",
     "rosterTitle": "Roster",
     "inviteTitle": "Invite students",
-    "privacyNote": "Teachers see session counts and minutes only — not student transcripts."
+    "privacyNote": "Teachers see session counts and minutes only — not student transcripts.",
+    "progressReport": {
+      "title": "Class progress report",
+      "description": "Aggregate activity for {name} — sessions and minutes only.",
+      "studentsEnrolled": "Students enrolled",
+      "totalSessions": "Total sessions",
+      "totalMinutes": "Total minutes",
+      "activeStudents": "{active} of {total} students have completed at least one session.",
+      "minutesLabel": "Minutes"
+    }
   },
   "assistant": {
     "title": "TutorForge Assistant",

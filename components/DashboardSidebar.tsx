@@ -1,7 +1,9 @@
 "use client";
 
 import {
+  BarChart3,
   CircleCheck,
+  ClipboardList,
   GraduationCap,
   History,
   Plus,
@@ -19,6 +21,8 @@ const DashboardSidebar = () => {
   const sidebarItems = [
     { label: tNav("home"), href: "/", icon: GraduationCap },
     { label: tNav("companions"), href: "/companions", icon: Search },
+    { label: tNav("assessment"), href: "/assessment", icon: ClipboardList },
+    { label: tNav("report"), href: "/report", icon: BarChart3 },
     { label: tNav("myJourney"), href: "/my-journey", icon: History },
     {
       label: tFooter("subscription"),

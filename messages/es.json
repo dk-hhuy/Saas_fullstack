@@ -15,6 +15,8 @@
     "about": "Acerca de",
     "companions": "Companions",
     "classroom": "Aula",
+    "assessment": "Evaluación",
+    "report": "Informe",
     "myJourney": "Mi recorrido"
   },
   "footer": {
@@ -38,11 +40,18 @@
     "highlight2": "Companions personalizados para cualquier materia",
     "highlight3": "Transcripciones, resúmenes y cuestionarios de sesión",
     "getStarted": "Empezar gratis",
-    "browseCompanions": "Explorar companions"
+    "browseCompanions": "Explorar companions",
+    "promoTitle": "Aprende con confianza mediante práctica de voz real",
+    "promoDescription": "Tutoría con IA que te ayuda a hablar, explicar ideas en voz alta y desarrollar habilidades en cualquier materia.",
+    "learnMore": "Saber más"
   },
   "home": {
     "featuredTitle": "Companions destacados",
     "featuredGuestDesc": "Prueba un tutor de IA público — inicia sesión para guardar tu progreso.",
+    "welcomeTitle": "Mantén tu ritmo de aprendizaje",
+    "welcomeDesc": "Elige un companion, inicia una sesión de voz y revisa tu progreso cuando quieras.",
+    "welcomePrimary": "Explorar companions",
+    "welcomeSecondary": "Mi recorrido",
     "readyTitle": "¿Listo para empezar a aprender?",
     "readyDesc": "Crea una cuenta gratis para crear companions, guardar sesiones y seguir tu progreso en Mi recorrido.",
     "popularTitle": "Companions populares",
@@ -104,6 +113,104 @@
     "remindersEnabled": "Recordatorios activados ({frequency}).",
     "remindersDisabled": "Recordatorios desactivados.",
     "remindersSaveError": "No se pudieron guardar los recordatorios"
+  },
+  "report": {
+    "title": "Informe de progreso",
+    "description": "Actividad de aprendizaje, placement y quizzes en una vista.",
+    "assessmentTitle": "Resumen de evaluación",
+    "assessmentDesc": "Tests de nivel y quizzes de sesión de tu cuenta.",
+    "placementCount": "Tests de nivel realizados",
+    "avgPlacement": "Puntuación total placement",
+    "sessionQuizzes": "Quizzes de sesión",
+    "latestPlacement": "Último placement",
+    "openAssessment": "Abrir Evaluación",
+    "openJourney": "Abrir Mi recorrido",
+    "placementHistory": "Historial de placement",
+    "charts": {
+      "title": "Tendencias en el tiempo",
+      "description": "Actividad semanal y progreso de placement.",
+      "weeklyActivity": "Actividad semanal",
+      "placementTrend": "Tendencia de placement",
+      "minutes": "Minutos",
+      "sessions": "Sesiones",
+      "score": "Puntuación",
+      "empty": "Completa sesiones o tests de nivel para ver tendencias.",
+      "noSessions": "Sin sesiones en las últimas 8 semanas.",
+      "singlePlacement": "Última puntuación: {score}%. Haz otro test para ver la tendencia.",
+      "subjectWeekly": "Minutos por asignatura (semanal)"
+    },
+    "usage": {
+      "title": "Uso del plan",
+      "description": "Minutos de voz usados este mes en tu plan actual.",
+      "usedMinutes": "Minutos usados",
+      "remaining": "Minutos restantes",
+      "manage": "Gestionar suscripción",
+      "monthlyLimit": "Límite mensual de voz",
+      "min": "min"
+    },
+    "weekCompare": {
+      "title": "Esta semana vs anterior",
+      "description": "Compara tu constancia de estudio reciente.",
+      "thisWeek": "Esta semana",
+      "lastWeek": "Semana anterior",
+      "min": "min",
+      "sessions": "sesiones",
+      "vsLastWeek": "vs semana anterior (minutos)",
+      "sessionDelta": "Sesiones {value} vs semana anterior"
+    },
+    "placementBySubject": {
+      "title": "Placement por asignatura",
+      "description": "Puntuación media y nivel reciente por asignatura.",
+      "tests": "{count} tests",
+      "avgScore": "{score}% prom.",
+      "level": "Nivel: {level}"
+    },
+    "level": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    }
+  },
+  "assessment": {
+    "title": "Evaluación",
+    "description": "Haz un test de nivel y repasa los cuestionarios de sesiones anteriores.",
+    "placementTitle": "Test de nivel",
+    "placementDesc": "Responde preguntas generadas por IA para estimar tu nivel actual.",
+    "subjectLabel": "Asignatura",
+    "topicLabel": "Tema (opcional)",
+    "topicPlaceholder": "p. ej. Álgebra básica…",
+    "startPlacement": "Iniciar test de nivel",
+    "submitPlacement": "Enviar respuestas",
+    "yourScore": "Tu puntuación",
+    "recommendedLevel": "Nivel recomendado:",
+    "takeAnother": "Hacer otro test",
+    "noApiKey": "Se requiere GEMINI_API_KEY para los tests de nivel.",
+    "generateError": "No se pudo generar el test. Inténtalo de nuevo.",
+    "saveError": "No se pudieron guardar los resultados.",
+    "scoreResult": "Puntuación: {score} / {total}",
+    "hubTitle": "Centro de cuestionarios",
+    "hubDesc": "Resultados de nivel y cuestionarios de sesiones.",
+    "hubEmpty": "Aún no hay cuestionarios. Completa un test o una sesión con quiz.",
+    "placementHistory": "Tests de nivel",
+    "sessionQuizzes": "Cuestionarios de sesión",
+    "unnamedSession": "Sesión de voz",
+    "questionCount": "{count, plural, one {# pregunta} other {# preguntas}}",
+    "level": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    }
+  },
+  "classroom": {
+    "progressReport": {
+      "title": "Informe de progreso del aula",
+      "description": "Actividad agregada de {name} — solo sesiones y minutos.",
+      "studentsEnrolled": "Estudiantes inscritos",
+      "totalSessions": "Sesiones totales",
+      "totalMinutes": "Minutos totales",
+      "activeStudents": "{active} de {total} estudiantes han completado al menos una sesión.",
+      "minutesLabel": "Minutos"
+    }
   },
   "assistant": {
     "title": "Asistente TutorForge",

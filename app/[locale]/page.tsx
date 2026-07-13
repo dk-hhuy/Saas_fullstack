@@ -1,9 +1,8 @@
 import CompanionCard from "@/components/CompanionCard";
 import CompanionLists from "@/components/CompanionLists";
 import CTA from "@/components/CTA";
-import LandingHero from "@/components/LandingHero";
+import HomePromoHero from "@/components/HomePromoHero";
 import MarketingSteps from "@/components/MarketingSteps";
-import PageHeader from "@/components/PageHeader";
 import SectionTitle from "@/components/SectionTitle";
 import AuthDashboardShell from "@/components/AuthDashboardShell";
 import { getAllCompanions, getUserSession } from "@/lib/actions/companion.actions";
@@ -57,7 +56,7 @@ const Page = async () => {
   if (!userId) {
     return (
       <main>
-        <LandingHero />
+        <HomePromoHero variant="guest" />
 
         <section className="flex flex-col gap-4">
           <SectionTitle
@@ -110,55 +109,57 @@ const Page = async () => {
 
   return (
     <AuthDashboardShell>
-      <main>
-        <PageHeader title={t("popularTitle")} description={t("popularDesc")} />
+      <main className="home-auth-main">
+        <HomePromoHero variant="auth" />
 
-        {studentAssignments.length > 0 && (
-          <StudentAssignmentsPanel assignments={studentAssignments} />
-        )}
-
-        <section className="flex flex-col gap-4">
-          <SectionTitle
-            title={t("featuredTitle")}
-            description={t("featuredAuthDesc")}
-          />
-          <div className="companions-grid">
-            {companions.map((companion, index) => (
-              <CompanionCard
-                key={companion.id}
-                {...companion}
-                color={getSubjectColor(companion.subject)}
-                animationDelay={index * 0.1}
-                isBookmarked={bookmarkedIds.includes(companion.id)}
-                isOwner={userId === companion.author}
-              />
-            ))}
-          </div>
-          {companions.length === 0 && (
-            <p className="text-sm text-muted-foreground">
-              {!supabaseReady
-                ? "Database is not connected on this deployment. Add Supabase env vars on Vercel and redeploy."
-                : marketplace("noFeatured")}
-            </p>
+        <div className="home-auth-body">
+          {studentAssignments.length > 0 && (
+            <StudentAssignmentsPanel assignments={studentAssignments} />
           )}
-        </section>
 
-        <section className="flex flex-col gap-6">
-          <SectionTitle title={t("activityTitle")} description={t("activityDesc")} />
-          {recentSessions.length > 0 ? (
-            <CompanionLists
-              title={t("recentSessions")}
-              companions={recentSessions}
-              classNames="w-full"
-              linkToSession
+          <section className="flex flex-col gap-4">
+            <SectionTitle
+              title={t("featuredTitle")}
+              description={t("featuredAuthDesc")}
             />
-          ) : (
-            <section className="section-card py-12 text-center text-muted-foreground">
-              <p>{t("noSessions")}</p>
-            </section>
-          )}
-          <CTA />
-        </section>
+            <div className="companions-grid">
+              {companions.map((companion, index) => (
+                <CompanionCard
+                  key={companion.id}
+                  {...companion}
+                  color={getSubjectColor(companion.subject)}
+                  animationDelay={index * 0.1}
+                  isBookmarked={bookmarkedIds.includes(companion.id)}
+                  isOwner={userId === companion.author}
+                />
+              ))}
+            </div>
+            {companions.length === 0 && (
+              <p className="text-sm text-muted-foreground">
+                {!supabaseReady
+                  ? "Database is not connected on this deployment. Add Supabase env vars on Vercel and redeploy."
+                  : marketplace("noFeatured")}
+              </p>
+            )}
+          </section>
+
+          <section className="flex flex-col gap-6">
+            <SectionTitle title={t("activityTitle")} description={t("activityDesc")} />
+            {recentSessions.length > 0 ? (
+              <CompanionLists
+                title={t("recentSessions")}
+                companions={recentSessions}
+                classNames="w-full"
+                linkToSession
+              />
+            ) : (
+              <section className="section-card py-12 text-center text-muted-foreground">
+                <p>{t("noSessions")}</p>
+              </section>
+            )}
+            <CTA />
+          </section>
+        </div>
       </main>
     </AuthDashboardShell>
   );

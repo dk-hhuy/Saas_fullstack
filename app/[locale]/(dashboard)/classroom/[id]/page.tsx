@@ -1,6 +1,7 @@
 import { getOptionalUserId } from "@/lib/auth-helpers";
 import { redirectToSignIn } from "@/lib/i18n-redirect";
 import { notFound } from "next/navigation";
+import ClassroomProgressReport from "@/components/ClassroomProgressReport";
 import ClassroomAssignments from "@/components/ClassroomAssignments";
 import ClassroomInvitePanel from "@/components/ClassroomInvitePanel";
 import ClassroomRoster from "@/components/ClassroomRoster";
@@ -84,6 +85,13 @@ const ClassroomDetailPage = async ({ params }: ClassroomDetailPageProps) => {
         assignableCompanions={[...assignableMap.values()]}
         isTeacher={classroom.isTeacher}
       />
+
+      {classroom.isTeacher && stats.length > 0 && (
+        <ClassroomProgressReport
+          stats={stats}
+          classroomName={classroom.name}
+        />
+      )}
 
       {classroom.isTeacher && (
         <ClassroomRoster

@@ -15,6 +15,8 @@
     "about": "关于",
     "companions": "Companions",
     "classroom": "课堂",
+    "assessment": "测评",
+    "report": "报告",
     "myJourney": "学习旅程"
   },
   "footer": {
@@ -38,11 +40,18 @@
     "highlight2": "为任何科目定制 Companion",
     "highlight3": "课程记录、摘要与测验",
     "getStarted": "免费开始",
-    "browseCompanions": "浏览 Companions"
+    "browseCompanions": "浏览 Companions",
+    "promoTitle": "通过真实语音练习自信学习",
+    "promoDescription": "AI 辅导帮助你开口说话、大声表达想法，并在任何科目上提升技能。",
+    "learnMore": "了解更多"
   },
   "home": {
     "featuredTitle": "精选 Companions",
     "featuredGuestDesc": "试用公开 AI 导师 — 登录以保存进度。",
+    "welcomeTitle": "保持你的学习节奏",
+    "welcomeDesc": "选择 Companion，开始语音课程，随时查看进度。",
+    "welcomePrimary": "浏览 Companions",
+    "welcomeSecondary": "学习旅程",
     "readyTitle": "准备好开始学习了吗？",
     "readyDesc": "免费注册以创建 Companion、保存课程并在学习旅程中跟踪进度。",
     "popularTitle": "热门 Companions",
@@ -104,6 +113,104 @@
     "remindersEnabled": "已开启学习提醒（{frequency}）。",
     "remindersDisabled": "已关闭学习提醒。",
     "remindersSaveError": "无法保存提醒设置"
+  },
+  "report": {
+    "title": "进度报告",
+    "description": "学习活动、分级测试结果与测验进度一览。",
+    "assessmentTitle": "测评摘要",
+    "assessmentDesc": "账户中的分级测试与会话测验。",
+    "placementCount": "已完成分级测试",
+    "avgPlacement": "分级测试总分",
+    "sessionQuizzes": "会话测验",
+    "latestPlacement": "最近分级",
+    "openAssessment": "打开测评",
+    "openJourney": "打开学习旅程",
+    "placementHistory": "分级历史",
+    "charts": {
+      "title": "时间趋势",
+      "description": "每周学习活动与分级测试分数变化。",
+      "weeklyActivity": "每周活动",
+      "placementTrend": "分级分数趋势",
+      "minutes": "分钟",
+      "sessions": "课程数",
+      "score": "分数",
+      "empty": "完成语音课程或分级测试后可查看趋势。",
+      "noSessions": "近8周暂无课程。",
+      "singlePlacement": "最近得分：{score}%。再测一次即可显示趋势线。",
+      "subjectWeekly": "按学科的每周分钟数"
+    },
+    "usage": {
+      "title": "套餐用量",
+      "description": "本计费月已使用的语音分钟数。",
+      "usedMinutes": "已用分钟",
+      "remaining": "剩余分钟",
+      "manage": "管理订阅",
+      "monthlyLimit": "每月语音上限",
+      "min": "分钟"
+    },
+    "weekCompare": {
+      "title": "本周 vs 上周",
+      "description": "对比近期学习节奏。",
+      "thisWeek": "本周",
+      "lastWeek": "上周",
+      "min": "分钟",
+      "sessions": "次课程",
+      "vsLastWeek": "较上周（分钟）",
+      "sessionDelta": "课程次数 {value}（较上周）"
+    },
+    "placementBySubject": {
+      "title": "按学科分级",
+      "description": "各学科平均分与最新水平。",
+      "tests": "{count} 次测试",
+      "avgScore": "平均 {score}%",
+      "level": "水平：{level}"
+    },
+    "level": {
+      "beginner": "初级",
+      "intermediate": "中级",
+      "advanced": "高级"
+    }
+  },
+  "assessment": {
+    "title": "测评",
+    "description": "完成分级测试了解水平，并复习过往语音课程的测验。",
+    "placementTitle": "分级测试",
+    "placementDesc": "回答 AI 生成的问题，评估当前学科水平。",
+    "subjectLabel": "学科",
+    "topicLabel": "主题（可选）",
+    "topicPlaceholder": "例如：基础代数…",
+    "startPlacement": "开始分级测试",
+    "submitPlacement": "提交答案",
+    "yourScore": "你的得分",
+    "recommendedLevel": "建议水平：",
+    "takeAnother": "再测一次",
+    "noApiKey": "分级测试需要配置 GEMINI_API_KEY。",
+    "generateError": "无法生成测试，请重试。",
+    "saveError": "无法保存结果。",
+    "scoreResult": "得分 {score} / {total}",
+    "hubTitle": "测验中心",
+    "hubDesc": "分级结果与会话测验汇总。",
+    "hubEmpty": "暂无测验。完成分级测试或带测验的语音课程。",
+    "placementHistory": "分级测试",
+    "sessionQuizzes": "会话测验",
+    "unnamedSession": "语音课程",
+    "questionCount": "{count} 道题",
+    "level": {
+      "beginner": "初级",
+      "intermediate": "中级",
+      "advanced": "高级"
+    }
+  },
+  "classroom": {
+    "progressReport": {
+      "title": "课堂进度报告",
+      "description": "{name} 的汇总活动 — 仅显示课程次数和分钟数。",
+      "studentsEnrolled": "已注册学生",
+      "totalSessions": "总课程次数",
+      "totalMinutes": "总分钟数",
+      "activeStudents": "{total} 名学生中有 {active} 人至少完成过一次课程。",
+      "minutesLabel": "分钟"
+    }
   },
   "assistant": {
     "title": "TutorForge 助手",

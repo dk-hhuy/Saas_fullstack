@@ -11,6 +11,7 @@ const NavItems = () => {
     { label: t("about"), href: "/about" },
     { label: t("companions"), href: "/companions" },
     { label: t("classroom"), href: "/classroom" },
+    { label: t("assessment"), href: "/assessment" },
     { label: t("myJourney"), href: "/my-journey" },
   ];
 
