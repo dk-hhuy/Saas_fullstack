@@ -11,7 +11,7 @@ interface CloneCompanionButtonProps {
   companionId: string;
   companionName: string;
   className?: string;
-  variant?: "button" | "full";
+  variant?: "button" | "full" | "compact";
 }
 
 const CloneCompanionButton = ({
@@ -45,6 +45,43 @@ const CloneCompanionButton = ({
     event.preventDefault();
     event.stopPropagation();
   };
+
+  if (variant === "compact") {
+    const compactClassName = cn(
+      "inline-flex w-auto shrink-0 items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-3 py-2 text-xs font-semibold whitespace-nowrap transition-colors hover:bg-muted disabled:opacity-50",
+      className
+    );
+
+    return (
+      <>
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button
+              type="button"
+              onClick={stopCardNavigation}
+              title={`Use ${companionName} as template`}
+              className={compactClassName}
+            >
+              <Copy size={14} aria-hidden />
+              Template
+            </button>
+          </SignInButton>
+        </SignedOut>
+        <SignedIn>
+          <button
+            type="button"
+            onClick={handleClone}
+            disabled={isCloning}
+            title={`Use ${companionName} as template`}
+            className={compactClassName}
+          >
+            <Copy size={14} aria-hidden />
+            {isCloning ? "..." : "Template"}
+          </button>
+        </SignedIn>
+      </>
+    );
+  }
 
   if (variant === "button") {
     return (

@@ -148,27 +148,38 @@ const CompanionCard = ({
         <p className="text-sm">{duration} minutes</p>
       </div>
 
-      <Link href={`/companions/${id}`} className="w-full">
-        <button type="button" className="btn-primary w-full justify-center">
-          Launch Lesson
-        </button>
-      </Link>
-
-      {!isOwner && (
-        <CloneCompanionButton companionId={id} companionName={name} />
-      )}
-
-      {!isOwner && author && marketplace_status === "approved" && (
-        <Link
-          href={`/creators/${author}`}
-          className={cn(
-            "text-center text-sm underline-offset-4 hover:underline",
-            mutedTextClass
-          )}
-        >
-          View creator profile
+      <div className="flex flex-wrap items-center gap-2">
+        <Link href={`/companions/${id}`} className="shrink-0">
+          <button
+            type="button"
+            title="Launch Lesson"
+            className="btn-primary px-3 py-2 text-xs whitespace-nowrap"
+          >
+            Launch
+          </button>
         </Link>
-      )}
+
+        {!isOwner && (
+          <CloneCompanionButton
+            companionId={id}
+            companionName={name}
+            variant="compact"
+          />
+        )}
+
+        {!isOwner && author && marketplace_status === "approved" && (
+          <Link
+            href={`/creators/${author}`}
+            title="View creator profile"
+            className={cn(
+              "inline-flex shrink-0 items-center rounded-xl border border-border bg-card px-3 py-2 text-xs font-semibold whitespace-nowrap transition-colors hover:bg-muted",
+              mutedTextClass
+            )}
+          >
+            Creator
+          </Link>
+        )}
+      </div>
     </motion.div>
   );
 };

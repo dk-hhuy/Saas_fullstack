@@ -273,6 +273,117 @@
   .landing-hero-image-frame {
     @apply relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/15 shadow-2xl;
   }
+  .about-main {
+    @apply gap-0 p-0 pb-0;
+  }
+  .about-main-body {
+    @apply flex flex-col gap-10 px-6 py-10 md:px-10 md:py-12 lg:px-14 pb-16;
+  }
+  .about-hero {
+    @apply relative w-full overflow-hidden px-6 pb-12 pt-12 text-center md:px-10 md:pb-16 md:pt-16 lg:px-14 lg:pt-20;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgb(255 255 255 / 0.14), transparent 55%),
+      linear-gradient(180deg, #e84a28 0%, #fe5933 42%, #d94a28 100%);
+    background-image:
+      linear-gradient(rgba(255 255 255 / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255 255 255 / 0.07) 1px, transparent 1px),
+      radial-gradient(ellipse 70% 50% at 50% 0%, rgb(255 255 255 / 0.14), transparent 55%),
+      linear-gradient(180deg, #e84a28 0%, #fe5933 42%, #d94a28 100%);
+    background-size: 52px 52px, 52px 52px, 100% 100%, 100% 100%;
+  }
+  .about-hero-glow {
+    @apply pointer-events-none absolute left-1/2 top-8 size-64 -translate-x-1/2 rounded-full bg-white/20 blur-3xl;
+  }
+  .about-hero-content {
+    @apply relative z-10 mx-auto flex max-w-4xl flex-col items-center gap-4;
+  }
+  .about-hero-eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.2em] text-white/80;
+  }
+  .about-hero-title {
+    @apply text-4xl font-bold leading-[1.1] tracking-tight text-white md:text-5xl lg:text-6xl;
+  }
+  .about-hero-subtitle {
+    @apply max-w-2xl text-base leading-relaxed text-white/85 md:text-lg;
+  }
+  .about-hero-showcase {
+    @apply relative z-10 mx-auto mt-10 w-full max-w-4xl md:mt-12 lg:max-w-5xl;
+  }
+  .about-hero-cards-row {
+    @apply flex items-end justify-center gap-3 sm:gap-4 md:gap-5;
+  }
+  .about-hero-card {
+    @apply rounded-2xl border border-black/5 bg-white p-3 text-left text-foreground shadow-[0_20px_50px_-18px_rgb(0_0_0/0.4)] sm:p-4;
+  }
+  .about-hero-card-header {
+    @apply mb-2 flex items-center gap-2 text-xs font-semibold text-muted-foreground sm:mb-3;
+  }
+  .about-hero-card-side {
+    @apply hidden w-[9.5rem] shrink-0 sm:block md:w-[11.5rem] lg:w-[12.5rem];
+  }
+  .about-hero-card-main {
+    @apply z-10 w-[11.5rem] shrink-0 -translate-y-2 sm:w-[13rem] md:w-[15rem] md:-translate-y-4;
+  }
+  .about-hero-stat-grid {
+    @apply grid grid-cols-2 gap-3;
+  }
+  .about-hero-stat-value {
+    @apply text-xl font-bold text-foreground;
+  }
+  .about-hero-stat-label {
+    @apply text-[11px] text-muted-foreground;
+  }
+  .about-hero-progress {
+    @apply mt-4 h-2 overflow-hidden rounded-full bg-muted;
+  }
+  .about-hero-progress-bar {
+    @apply h-full rounded-full bg-primary;
+  }
+  .about-hero-session {
+    @apply flex items-center gap-3;
+  }
+  .about-hero-avatar {
+    @apply size-16 shrink-0 rounded-xl object-cover object-top;
+  }
+  .about-hero-session-body {
+    @apply min-w-0 flex-1;
+  }
+  .about-hero-session-title {
+    @apply text-sm font-semibold;
+  }
+  .about-hero-session-topic {
+    @apply text-[11px] text-muted-foreground;
+  }
+  .about-hero-waveform {
+    @apply mt-2 flex items-end gap-0.5;
+  }
+  .about-hero-waveform-bar {
+    @apply w-1 rounded-full bg-primary/70;
+  }
+  .about-hero-library {
+    @apply flex flex-col gap-2;
+  }
+  .about-hero-library-item {
+    @apply flex items-center gap-2 text-xs font-medium;
+  }
+  .about-hero-library-badge {
+    @apply shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary;
+  }
+  .about-values-grid {
+    @apply grid gap-4 md:grid-cols-3;
+  }
+  .about-value-card {
+    @apply flex flex-col gap-3 rounded-3xl border border-border bg-card p-6 shadow-sm;
+  }
+  .about-steps-grid {
+    @apply grid gap-4 md:grid-cols-3;
+  }
+  .about-step-card {
+    @apply relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-sm;
+  }
+  .about-step-number {
+    @apply text-5xl font-bold text-primary/15;
+  }
   .btn-primary {
     @apply bg-primary text-primary-foreground rounded-xl cursor-pointer px-4 py-2.5 flex items-center gap-2 font-semibold hover:bg-primary/90 transition-colors;
   }
