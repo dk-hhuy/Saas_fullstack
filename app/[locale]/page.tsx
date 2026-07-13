@@ -13,6 +13,7 @@ import StudentAssignmentsPanel from "@/components/StudentAssignmentsPanel";
 import { getBookmarkedCompanionIds } from "@/lib/actions/bookmark.actions";
 import { getSubjectColor } from "@/lib/utils";
 import { getOptionalUserId } from "@/lib/auth-helpers";
+import { isSupabaseConfigured } from "@/lib/supabase";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 
@@ -39,7 +40,9 @@ const Page = async () => {
   const userId = await getOptionalUserId();
   const t = await getTranslations("home");
   const common = await getTranslations("common");
+  const marketplace = await getTranslations("marketplace");
   const companions = await loadHomeCompanions();
+  const supabaseReady = isSupabaseConfigured();
   const recentSessionsResult = userId
     ? await getUserSession(userId, { page: 1, limit: 10 }).catch(() => null)
     : null;
@@ -73,6 +76,13 @@ const Page = async () => {
               />
             ))}
           </div>
+          {companions.length === 0 && (
+            <p className="text-sm text-muted-foreground">
+              {!supabaseReady
+                ? "Database is not connected on this deployment. Add Supabase env vars on Vercel and redeploy."
+                : marketplace("noFeatured")}
+            </p>
+          )}
         </section>
 
         <MarketingSteps />
@@ -124,6 +134,13 @@ const Page = async () => {
               />
             ))}
           </div>
+          {companions.length === 0 && (
+            <p className="text-sm text-muted-foreground">
+              {!supabaseReady
+                ? "Database is not connected on this deployment. Add Supabase env vars on Vercel and redeploy."
+                : marketplace("noFeatured")}
+            </p>
+          )}
         </section>
 
         <section className="flex flex-col gap-6">
