@@ -136,11 +136,14 @@ export function buildTranscriptPrintHtml(
     <meta charset="utf-8" />
     <title>${escapeHtml(meta.companionName)} — Transcript</title>
     <style>
-      body { font-family: system-ui, sans-serif; line-height: 1.5; padding: 24px; color: #111; }
+      body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.5; padding: 24px; color: #111; }
       h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
       .meta { color: #555; font-size: 0.9rem; margin-bottom: 1.5rem; }
       h2 { font-size: 1.1rem; margin-top: 1.5rem; }
       p { margin: 0.5rem 0; }
+      @media print {
+        body { padding: 0; }
+      }
     </style>
   </head>
   <body>
@@ -158,16 +161,81 @@ export function buildTranscriptPrintHtml(
 </html>`;
 }
 
+/**
+ * Opens the system print dialog (Save as PDF available there).
+ * Uses a hidden iframe so we avoid `window.open(..., "noopener")`
+ * returning null and silently no-oping.
+ * @returns false if the browser could not prepare a printable frame
+ */
 export function printTranscript(
   messages: SavedMessage[],
   meta: TranscriptExportMeta
-) {
-  const html = buildTranscriptPrintHtml(messages, meta);
-  const printWindow = window.open("", "_blank", "noopener,noreferrer");
-  if (!printWindow) return;
+): boolean {
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return false;
+  }
 
-  printWindow.document.write(html);
-  printWindow.document.close();
-  printWindow.focus();
-  printWindow.print();
+  const html = buildTranscriptPrintHtml(messages, meta);
+  const iframe = document.createElement("iframe");
+  iframe.setAttribute("title", "Print transcript");
+  iframe.setAttribute("aria-hidden", "true");
+  iframe.style.position = "fixed";
+  iframe.style.right = "0";
+  iframe.style.bottom = "0";
+  iframe.style.width = "0";
+  iframe.style.height = "0";
+  iframe.style.border = "0";
+  iframe.style.opacity = "0";
+  iframe.style.pointerEvents = "none";
+
+  document.body.appendChild(iframe);
+
+  const frameWindow = iframe.contentWindow;
+  const frameDocument = iframe.contentDocument ?? frameWindow?.document;
+
+  if (!frameWindow || !frameDocument) {
+    iframe.remove();
+    return false;
+  }
+
+  let printed = false;
+
+  const removeFrame = () => {
+    if (iframe.parentNode) iframe.remove();
+  };
+
+  const triggerPrint = () => {
+    if (printed) return;
+    printed = true;
+
+    try {
+      frameWindow.focus();
+      frameWindow.print();
+    } catch {
+      removeFrame();
+      return;
+    }
+
+    const onAfterPrint = () => {
+      frameWindow.removeEventListener("afterprint", onAfterPrint);
+      window.setTimeout(removeFrame, 300);
+    };
+
+    frameWindow.addEventListener("afterprint", onAfterPrint);
+    // Safari / some browsers may not fire afterprint reliably
+    window.setTimeout(removeFrame, 60_000);
+  };
+
+  frameDocument.open();
+  frameDocument.write(html);
+  frameDocument.close();
+
+  // Wait two frames so layout paints before the print dialog
+  window.requestAnimationFrame(() => {
+    window.requestAnimationFrame(() => {
+      window.setTimeout(triggerPrint, 50);
+    });
+  });
+
+  return true;
 }
