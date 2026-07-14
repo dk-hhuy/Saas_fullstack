@@ -13,6 +13,7 @@
   "nav": {
     "home": "Home",
     "about": "About",
+    "contact": "Contact",
     "companions": "Companions",
     "classroom": "Classroom",
     "assessment": "Assessment",
@@ -24,6 +25,7 @@
     "howItWorks": "How it works",
     "faq": "FAQ",
     "pricing": "Pricing",
+    "contact": "Contact",
     "companions": "Companions",
     "myJourney": "My Journey",
     "subscription": "Subscription",
@@ -31,6 +33,22 @@
     "terms": "Terms",
     "copyright": "TutorForge — Real-time AI Teaching Platform",
     "learnTagline": "Learn through natural voice conversations"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Reach the TutorForge team by email, phone, or visit our Canada office.",
+    "reachTitle": "Get in touch",
+    "reachDesc": "Email or call us for product questions, demos, and partnership inquiries.",
+    "emailLabel": "Email",
+    "emailHint": "We usually reply within 1–2 business days.",
+    "phoneLabel": "Phone",
+    "phoneHint": "Mon–Fri, 9:00–17:00 (Eastern Time, Ottawa).",
+    "addressLabel": "Canada office",
+    "addressHint": "Open in Maps for directions.",
+    "ctaTitle": "Ready to try TutorForge?",
+    "ctaDesc": "Browse public companions or start a free account to build your own AI tutor.",
+    "browseCompanions": "Browse companions",
+    "visitFaq": "Visit FAQ"
   },
   "hero": {
     "badge": "AI voice tutoring",

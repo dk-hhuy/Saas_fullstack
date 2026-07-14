@@ -13,6 +13,7 @@
   "nav": {
     "home": "首页",
     "about": "关于",
+    "contact": "联系我们",
     "companions": "Companions",
     "classroom": "课堂",
     "assessment": "测评",
@@ -24,6 +25,7 @@
     "howItWorks": "使用方式",
     "faq": "FAQ",
     "pricing": "价格",
+    "contact": "联系我们",
     "companions": "Companions",
     "myJourney": "学习旅程",
     "subscription": "订阅",
@@ -31,6 +33,22 @@
     "terms": "条款",
     "copyright": "TutorForge — 实时 AI 教学平台",
     "learnTagline": "通过自然语音对话学习"
+  },
+  "contact": {
+    "title": "联系我们",
+    "description": "通过邮箱、电话联系 TutorForge，或查看加拿大办公室地址。",
+    "reachTitle": "联系方式",
+    "reachDesc": "欢迎通过邮件或电话咨询产品、预约演示或商务合作。",
+    "emailLabel": "邮箱",
+    "emailHint": "我们通常在 1–2 个工作日内回复。",
+    "phoneLabel": "电话",
+    "phoneHint": "周一至周五，9:00–17:00（东部时间，渥太华）。",
+    "addressLabel": "加拿大办公室",
+    "addressHint": "在 Maps 中打开路线",
+    "ctaTitle": "准备试试 TutorForge？",
+    "ctaDesc": "浏览公开 companion，或免费注册并创建你自己的 AI 导师。",
+    "browseCompanions": "浏览 companions",
+    "visitFaq": "查看 FAQ"
   },
   "hero": {
     "badge": "AI 语音辅导",

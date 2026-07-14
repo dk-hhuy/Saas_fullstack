@@ -144,6 +144,12 @@ const AboutPage = () => {
               How it works
             </Link>
             <Link
+              href="/contact"
+              className="inline-flex items-center rounded-xl border border-border px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted"
+            >
+              Contact
+            </Link>
+            <Link
               href="/faq"
               className="inline-flex items-center rounded-xl border border-border px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-muted"
             >

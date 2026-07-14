@@ -13,6 +13,7 @@
   "nav": {
     "home": "ホーム",
     "about": "概要",
+    "contact": "お問い合わせ",
     "companions": "Companions",
     "classroom": "クラス",
     "assessment": "評価",
@@ -24,6 +25,7 @@
     "howItWorks": "使い方",
     "faq": "FAQ",
     "pricing": "料金",
+    "contact": "お問い合わせ",
     "companions": "Companions",
     "myJourney": "マイジャーニー",
     "subscription": "サブスクリプション",
@@ -31,6 +33,22 @@
     "terms": "利用規約",
     "copyright": "TutorForge — リアルタイム AI 教育プラットフォーム",
     "learnTagline": "自然な音声会話で学ぶ"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "description": "TutorForge チームへの連絡 — メール、電話、カナダオフィス。",
+    "reachTitle": "ご連絡先",
+    "reachDesc": "製品の質問、デモ、パートナーシップはメールまたはお電話で。",
+    "emailLabel": "メール",
+    "emailHint": "通常 1〜2 営業日以内にご返信します。",
+    "phoneLabel": "電話",
+    "phoneHint": "月〜金 9:00–17:00（東部時間・オタワ）。",
+    "addressLabel": "カナダオフィス",
+    "addressHint": "Maps で経路を開く",
+    "ctaTitle": "TutorForge を試してみますか？",
+    "ctaDesc": "公開コンパニオンを見るか、無料アカウントで自分の AI チューターを作れます。",
+    "browseCompanions": "コンパニオンを見る",
+    "visitFaq": "FAQ を見る"
   },
   "hero": {
     "badge": "AI 音声チューター",

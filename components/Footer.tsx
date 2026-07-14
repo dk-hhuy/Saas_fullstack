@@ -9,6 +9,7 @@ const Footer = async () => {
     { label: t("howItWorks"), href: "/how-it-works" },
     { label: t("faq"), href: "/faq" },
     { label: t("pricing"), href: "/pricing" },
+    { label: t("contact"), href: "/contact" },
     { label: t("companions"), href: "/companions" },
     { label: t("myJourney"), href: "/my-journey" },
     { label: t("subscription"), href: "/subscription" },

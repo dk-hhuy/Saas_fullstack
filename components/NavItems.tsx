@@ -9,6 +9,7 @@ const NavItems = () => {
   const navItems = [
     { label: t("home"), href: "/" },
     { label: t("about"), href: "/about" },
+    { label: t("contact"), href: "/contact" },
     { label: t("companions"), href: "/companions" },
     { label: t("classroom"), href: "/classroom" },
     { label: t("assessment"), href: "/assessment" },

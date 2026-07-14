@@ -13,6 +13,7 @@
   "nav": {
     "home": "Trang chủ",
     "about": "Giới thiệu",
+    "contact": "Liên hệ",
     "companions": "Companions",
     "classroom": "Lớp học",
     "assessment": "Đánh giá",
@@ -24,6 +25,7 @@
     "howItWorks": "Cách hoạt động",
     "faq": "FAQ",
     "pricing": "Bảng giá",
+    "contact": "Liên hệ",
     "companions": "Companions",
     "myJourney": "Hành trình",
     "subscription": "Gói đăng ký",
@@ -31,6 +33,22 @@
     "terms": "Điều khoản",
     "copyright": "TutorForge — Nền tảng dạy học AI thời gian thực",
     "learnTagline": "Học qua hội thoại giọng nói tự nhiên"
+  },
+  "contact": {
+    "title": "Liên hệ",
+    "description": "Liên hệ đội ngũ TutorForge qua email, số điện thoại, hoặc văn phòng Canada.",
+    "reachTitle": "Kết nối với chúng tôi",
+    "reachDesc": "Gửi email hoặc gọi điện cho câu hỏi sản phẩm, demo và hợp tác.",
+    "emailLabel": "Email",
+    "emailHint": "Chúng tôi thường phản hồi trong 1–2 ngày làm việc.",
+    "phoneLabel": "Số điện thoại",
+    "phoneHint": "Thứ Hai–Thứ Sáu, 9:00–17:00 (giờ Eastern, Ottawa).",
+    "addressLabel": "Văn phòng Canada",
+    "addressHint": "Mở Maps để xem đường đi.",
+    "ctaTitle": "Sẵn sàng dùng thử TutorForge?",
+    "ctaDesc": "Duyệt companion công khai hoặc tạo tài khoản miễn phí để xây AI tutor riêng.",
+    "browseCompanions": "Xem companions",
+    "visitFaq": "Xem FAQ"
   },
   "hero": {
     "badge": "Gia sư AI giọng nói",

@@ -13,6 +13,7 @@
   "nav": {
     "home": "Inicio",
     "about": "Acerca de",
+    "contact": "Contacto",
     "companions": "Companions",
     "classroom": "Aula",
     "assessment": "Evaluación",
@@ -24,6 +25,7 @@
     "howItWorks": "Cómo funciona",
     "faq": "FAQ",
     "pricing": "Precios",
+    "contact": "Contacto",
     "companions": "Companions",
     "myJourney": "Mi recorrido",
     "subscription": "Suscripción",
@@ -31,6 +33,22 @@
     "terms": "Términos",
     "copyright": "TutorForge — Plataforma de enseñanza con IA en tiempo real",
     "learnTagline": "Aprende mediante conversaciones de voz naturales"
+  },
+  "contact": {
+    "title": "Contacto",
+    "description": "Contacta al equipo de TutorForge por email, teléfono o visita nuestra oficina en Canadá.",
+    "reachTitle": "Habla con nosotros",
+    "reachDesc": "Escríbenos o llámanos para preguntas de producto, demos y alianzas.",
+    "emailLabel": "Email",
+    "emailHint": "Normalmente respondemos en 1–2 días hábiles.",
+    "phoneLabel": "Teléfono",
+    "phoneHint": "Lun–Vie, 9:00–17:00 (hora del Este, Ottawa).",
+    "addressLabel": "Oficina en Canadá",
+    "addressHint": "Abrir Maps para ver la ruta.",
+    "ctaTitle": "¿Listo para probar TutorForge?",
+    "ctaDesc": "Explora companions públicos o crea una cuenta gratis para construir tu propio tutor de IA.",
+    "browseCompanions": "Ver companions",
+    "visitFaq": "Ver FAQ"
   },
   "hero": {
     "badge": "Tutoría por voz con IA",
